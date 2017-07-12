@@ -53,9 +53,9 @@
 		
 		<div id="pay_screen_sberbank" class="pay_screen payment_type-sberbank" style="{{ (@$order && $order->payment_type &&  $order->payment_type==='sberbank') ? 'display:block;' : 'display:none;' }}">
 			<p class="lead">Способ оплаты: <b>{{ HTML::paymentTypeText('sberbank') }}</b></p>
-			<p><b>Шаг 1</b>. Пожалуйста, осуществите перевод с Вашей карты Сбербанка на карту № <b>639002389040808453</b> через Сбербанк.Онлайн или отделение банка</p>
-			<p><b>Шаг 2</b>. Обязательно напишите нам на <b>info@iteam.ru</b>, указав данные платежа: дату и время, тип: перевод на карту Сбербанка, сумму и Ваше ФИО</p>
-			
+			<p><b>Шаг 1</b>. Пожалуйста, осуществите перевод с Вашей карты Сбербанка на карту № <b>639002389040808453</b> (на имя Ступаковой Марины Владиславовны) через Сбербанк.Онлайн или отделение банка</p>
+			<p><b>Шаг 2</b>. Обязательно напишите нам на адрес <b>info@iteam.ru</b>, указав номер и Ваши имя и фамилию</p>
+
 			{!! Form::model($order, ['route' => ['orders.update', $order->id], 'class' => '-validate -ajax']) !!}
 				{!! Form::hidden('_method', 'PUT') !!}
 				{!! Form::hidden('_redirect', ( @$_redirect ? $_redirect : route('orders.show',$order->id) ) ) !!}
