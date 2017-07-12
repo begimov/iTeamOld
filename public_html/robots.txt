@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /webinars/
+Disallow: /filemanager/
+Disallow: /promo/
+Disallow: /business-processes-form.php
+Disallow: /~
+Disallow: /webinar/
+Sitemap: https://iteam.ru/sitemap.xml
+
+User-agent: Yandex 
+Disallow: /~
+Disallow: /webinars/
+Disallow: /filemanager/
+Disallow: /promo/
+Disallow: /business-processes-form.php
+Disallow: /webinar/
+Host: https://iteam.ru

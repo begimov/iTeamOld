@@ -1,0 +1,11 @@
+/vendor
+/node_modules
+/local
+/public_html/filemanager
+/public
+/composer.phar
+/.env
+*.log
+*.log.*
+*.tar.gz
+*.gz
