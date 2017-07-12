@@ -3,6 +3,7 @@
 /local
 /public_html/filemanager
 /public
+/.idea
 /composer.phar
 /.env
 *.log
