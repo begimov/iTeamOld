@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "689b9fa31256d85d34e736d2af6d307a",
+    "content-hash": "09fcba992d00b07f2369ab840f0cffaf",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -847,61 +847,6 @@
                 "nsm"
             ],
             "time": "2015-12-23T07:20:42+00:00"
-        },
-        {
-            "name": "lanz/laravel-commentable",
-            "version": "v2.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/RomainLanz/laravel-commentable.git",
-                "reference": "3c888f05d8834498a6ef2643f7f9c59167fdd2f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/RomainLanz/laravel-commentable/zipball/3c888f05d8834498a6ef2643f7f9c59167fdd2f4",
-                "reference": "3c888f05d8834498a6ef2643f7f9c59167fdd2f4",
-                "shasum": ""
-            },
-            "require": {
-                "baum/baum": "~1.1",
-                "illuminate/database": "~5.0",
-                "illuminate/support": "~5.0",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/commands"
-                ],
-                "psr-4": {
-                    "Lanz\\Commentable\\": "src/Commentable"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Romain Lanz",
-                    "email": "lanz.romain@gmail.com"
-                }
-            ],
-            "description": "Allows for threaded comments to be added to multiple and different models.",
-            "keywords": [
-                "Laravel 4",
-                "comment",
-                "commentable",
-                "laravel",
-                "laravel 5",
-                "nested set",
-                "threaded"
-            ],
-            "abandoned": "slynova/laravel-commentable",
-            "time": "2015-03-23T10:53:38+00:00"
         },
         {
             "name": "laravel/framework",
