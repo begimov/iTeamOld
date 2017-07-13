@@ -107,6 +107,7 @@ class LearnController extends Controller
 			$childrens = $this->learn_m
 								->where($table.'.path','LIKE','/')
 								->where($table.'.title','NOT LIKE','')
+                                ->orderBy($table.'.order', 'asc')
 								->orderBy($table.'.created_at', 'desc')
 								->paginate(20);
 
@@ -159,7 +160,7 @@ class LearnController extends Controller
         foreach ($learns as $learn) {
             $mklass .= "<div class='col-md-4'><img src='" . $learn->img . "' alt='' style='width: 100%'><a href='" . url('learn' . $learn->path . $learn->wid) . "' style='text-align: center;' target=\"_blank\">" . $learn->title . "</a></div>";
         }
-        
+
         return $mklass;
     }
 
