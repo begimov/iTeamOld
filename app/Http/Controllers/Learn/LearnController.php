@@ -62,6 +62,7 @@ class LearnController extends Controller
 								->where($table.'.path','LIKE',$path.$wid.'/')
 								->where($table.'.title','NOT LIKE','')
 								->where($table.'.public','>',0)
+                                ->orderBy($table.'.order', 'asc')
 								->orderBy($table.'.updated_at', 'desc')
 								->paginate(50);
 
@@ -107,7 +108,6 @@ class LearnController extends Controller
 			$childrens = $this->learn_m
 								->where($table.'.path','LIKE','/')
 								->where($table.'.title','NOT LIKE','')
-                                ->orderBy($table.'.order', 'asc')
 								->orderBy($table.'.created_at', 'desc')
 								->paginate(20);
 
