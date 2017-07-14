@@ -60,6 +60,7 @@
         ],
         "post-update-cmd": [
             "php artisan clear-compiled",
+            "php artisan post-update",
             "php artisan optimize"
         ]
     },
