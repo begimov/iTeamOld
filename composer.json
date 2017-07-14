@@ -37,8 +37,7 @@
             "app/helpers.php"
         ],
         "psr-4": {
-            "App\\": "app/",
-            "Lanz\\Commentable\\": "packages/lanz/laravel-commentable/src/Commentable"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {
