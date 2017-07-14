@@ -184,6 +184,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Local Service Providers ans Aliases
+    |--------------------------------------------------------------------------
+    |
+    | These service providers and aliases are registered only in non production
+    | environment.
+    |
+    */
+
+    'local_providers' => [
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+    ],
+
+    'local_aliases' => [
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Class Aliases
     |--------------------------------------------------------------------------
     |
