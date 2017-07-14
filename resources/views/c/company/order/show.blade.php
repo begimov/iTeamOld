@@ -494,6 +494,25 @@
                 payModal.modal('show');
             }
 
+            $('.material-category').click(function (e) {
+                $(this).find('.category-materials').toggle();
+            });
+
+            $('.material').click(function (e) {
+                $(this).find('.material-content').toggle();
+
+                if (!$(this).find('iframe').prop('src')) {
+                    $(this).find('iframe').prop('src', function () {
+                        return $(this).data('src');
+                    });
+                }
+
+                return false;
+            });
+
+            $('.material-content a').click(function (e) {
+                e.stopPropagation();
+            });
         })(jQuery);
     </script>
 @stop
