@@ -618,10 +618,6 @@ Route::group(['middleware' => ['web']], function () {
                     Route::get('info/{id}', ['as' => 'admin.test.info', 'uses' => 'TestController@getInfo']);
                 });
 
-                Route::group(['prefix' => 'corporation-test', 'namespace' => 'Admin'], function () {
-                    Route::get('/', ['as' => 'admin.corporation-test.index', 'uses' => 'CorporationTestController@index']);
-                });
-
                 Route::group(['prefix' => 'category-learn', 'namespace' => 'Admin'], function () {
                     Route::get('/', ['as' => 'admin.category-learn.index', 'uses' => 'CategoryController@index']);
                     Route::post('store', ['as' => 'admin.category-learn.store', 'uses' => 'CategoryController@store']);
