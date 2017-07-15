@@ -124,4 +124,15 @@ return [
 
     'pretend' => false,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Site administrator's email
+    |--------------------------------------------------------------------------
+    |
+    | This value is used for emails about unexpected behaviour on site.
+    |
+    */
+
+    'admin_email' => env('ADMIN_EMAIL'),
+
 ];
