@@ -35,7 +35,7 @@ class AdminController extends Controller {
 		$route = ($user->role_id > 1) ? 'admin.article.index' : 'admin.order.index';
 		return redirect()->route($route);
 	}
-	
+
 	/**
 	 * Show the media panel.
 	 *
@@ -44,31 +44,8 @@ class AdminController extends Controller {
 	public function filemanager()
 	{
 		$url = config('files.url') . '?langCode=' . config('app.locale');
-		
+
 		return view('admin.filemanager', compact('url'));
 
 	}
-	
-
-	public function test()
-	{
-		/*
-		$ords = Order::with('user')->where('status','>',-6)->get();
-		foreach($ords AS $o){
-			$save = false;
-			if(!$o->name && @$o->user->name) {
-				$o->name = $o->user->name;
-				$save = true;
-			}
-			if(!$o->phone && @$o->user->phone) {
-				$o->phone = $o->user->phone;
-				$save = true;
-			}
-			if($save) $o->save();
-		}
-		*/
-		return 'ok';
-
-	}
-
 }

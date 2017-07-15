@@ -661,8 +661,6 @@ Route::group(['middleware' => ['web']], function () {
 
             });
 
-            //Route::get('test', 'Admin\AdminController@test');
-
             Route::get('files', [
                 'uses' => 'Admin\AdminController@filemanager',
                 'as' => 'admin.files'
