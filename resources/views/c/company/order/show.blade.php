@@ -502,8 +502,10 @@
                 $(this).find('.material-content').toggle();
 
                 if (!$(this).find('iframe').prop('src')) {
-                    $(this).find('iframe').prop('src', function () {
-                        return $(this).data('src');
+                    $(this).find('iframe').each(function (i, $el) {
+                        $el.prop('src', function () {
+                            return $(this).data('src');
+                        });
                     });
                 }
 
