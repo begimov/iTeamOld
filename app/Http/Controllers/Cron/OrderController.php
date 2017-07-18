@@ -183,7 +183,8 @@ class OrderController extends Controller
         $users = User::whereHas('orders', function ($query) use ($courseIdInRassrochka) {
             return $query
                     ->where('product_id', $courseIdInRassrochka)
-                    ->where('status', '>=', 1);
+                    ->where('status', '>=', 1)
+                    ->where('payed_at', '<=', time() - 60 * 60 * 24 * 14);
         })
             ->whereHas('orders', function ($query) use ($secondPartCourseIdRassrochka) {
                 $query
