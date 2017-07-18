@@ -184,7 +184,7 @@ class OrderController extends Controller
             return $query
                     ->where('product_id', $courseIdInRassrochka)
                     ->where('status', '>=', 1)
-                    ->where('payed_at', '<=', time() - 60 * 60 * 24 * 14);
+                    ->where('payed_at', '<=', \Carbon\Carbon::now()->subWeeks(2));
         })
             ->whereHas('orders', function ($query) use ($secondPartCourseIdRassrochka) {
                 $query
