@@ -83,6 +83,7 @@ Route::get('pay/{id}', 'Admin\OrderController@getCheck');
 Route::post('pay/{id}', 'Admin\OrderController@postCheck');
 
 Route::get('demon/order', 'Cron\OrderController@index');
+Route::get('demon/order/rassrochka', 'Cron\OrderController@rassrochka');
 
 Route::get('company/action{path?}', function() {
     return redirect('/company/about');
@@ -128,6 +129,9 @@ Route::get('publications/finances/section_11/article_513', function() {
 
 Route::get('publications/finances/section_12/page_1/count', function() {
     return redirect('/publications/finances/section_12');
+});
+Route::get('learn/11-effektivnyh-fishek-dlja-organizatsii-komandnoj-raboty-v-v', function() {
+    return redirect('learn/organizatsionnaja-struktura/11-effektivnyh-fishek-dlja-organizatsii-komandnoj-raboty-v-v');
 });
 
 Route::get('publications/finances/section_14{path?}', function() {

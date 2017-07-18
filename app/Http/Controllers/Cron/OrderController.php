@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Response;
 use Mail;
 
@@ -171,6 +172,35 @@ class OrderController extends Controller
                     }
                 }
             }
+        }
+    }
+
+    public function rassrochka()
+    {
+        $courseIdInRassrochka = 178;
+        $secondPartCourseIdRassrochka = 179;
+
+        $users = User::whereHas('orders', function ($query) use ($courseIdInRassrochka) {
+            return $query
+                    ->where('product_id', $courseIdInRassrochka)
+                    ->where('status', '>=', 1);
+        })
+            ->whereHas('orders', function ($query) use ($secondPartCourseIdRassrochka) {
+                $query
+                    ->where('product_id', $secondPartCourseIdRassrochka)
+                    ->where('status', '>=', -4)
+                    ->where('status', '<', 1);
+            })
+            ->get();
+
+        $text = 'Для оплаты второй части рассрочки "Летнего безлимита" перейдите по ссылке https://iteam.ru/learn/webinar/letnij-bezlimit-ot-iteam-v-rassrochku-2';
+
+        foreach ($users as $user) {
+            Mail::raw($text, function ($mail) use ($user) {
+                $mail
+                    ->to($user->email)
+                    ->subject('Оплата второй части рассрочки "Летнего безлимита"');
+            });
         }
     }
 }
