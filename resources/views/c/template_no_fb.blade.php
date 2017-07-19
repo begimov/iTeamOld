@@ -215,7 +215,7 @@
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (499) 110-2684</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a></li>
-                        <li>Тех поддержка <i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a></li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a> Тех поддержка</li>
                     </ul>
                     <br class="hidden">
                     <ul class="list-inline hidden">
