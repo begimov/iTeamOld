@@ -7,23 +7,23 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	
+
     <meta name="keywords" content="{{ @$page->meta_keywords ? $page->meta_keywords : (@$page->title ? $page->title : trans('front/site.title')) }}">
     <meta name="description" content="{{ @$page->meta_description ? $page->meta_description : (@$page->intro ? $page->intro : trans('front/site.title')) }}">
     <meta name="author" content="slava@trunov.me">
     <meta property="fb:admins" content="100000287596744"/>
     <meta property="fb:app_id" content="1254406184618438" />
-	
+
 	<meta name="_token" content="{!! csrf_token() !!}" />
 
     <title>
 		@yield('title')
 		{{ trans('front/site.title') }}
 	</title>
-	
+
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 	<link href="/favicon.ico" rel="icon" type="image/x-icon">
-	
+
     <!-- Bootstrap Core CSS -->
 	{!! HTML::style('css/bootstrap.min.css') !!}
     <!-- Custom CSS -->
@@ -32,7 +32,7 @@
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	<!--link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"-->
-	
+
 	<!-- Web Fonts -->
 	<link href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Cuprum|PT+Sans+Narrow|Play" rel="stylesheet">
@@ -43,7 +43,7 @@
         <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	
+
 	@yield('head')
 </head>
 
@@ -52,7 +52,7 @@
 	<!--[if lt IE 8]>
 		<p class="browserupgrade">Вы используете <strong>устаревший</strong> браузер. Пожалуйста, <a href="http://browsehappy.com/">обновите его</a> для нормальной работы современных сайтов.</p>
 	<![endif]-->
-	
+
 	<!-- Yandex.Metrika counter -->
 	<script type="text/javascript">
 	(function (d, w, c) {
@@ -86,11 +86,11 @@
 
 
 
-	
+
   <div id="top_container">
-  
+
     <div id="top_header">
-    
+
       <div id="logo">
         <span class="logo">©</span>
         <span class="iteam">iTeam</span>
@@ -122,11 +122,11 @@
           </ul>
         </div>
       </div>
-    
+
     </div>
-  
+
   </div>
-  
+
 
 <div id="slider">
 	<div class="css-slider">
@@ -165,14 +165,14 @@
 		</ul>
 	</div>
 </div>
-    
+
   <div id="body_container">
-	
+
 	@yield('header')
-		
+
 
 	<main>
-		
+
 		<div class="alerts">
 		@if(session()->has('status'))
 			@include('partials/error', ['type' => 'success', 'message' => session('status')])
@@ -181,11 +181,11 @@
 			@include('partials/error', ['type' => 'danger', 'message' => session('error')])
 		@endif
 		</div>
-		
+
 		@yield('main')
-			
+
 	</main>
-	
+
   </div>
 
     <!-- Footer -->
@@ -198,7 +198,7 @@
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (499) 110-2684</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a>
-                        </li>
+                        <li>Тех поддержка <i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a></li>
                     </ul>
                     <br class="hidden">
                     <ul class="list-inline hidden">
@@ -215,7 +215,7 @@
                     <hr class="--small">
                     <p class="text-muted">&copy; 2002 - {{ date('Y') }} {{ trans('front/site.title') }}</p>
                 </div>
-				
+
                 <div class="col-lg-2 visible-lg -text-right">
                     <h5><strong>Компания</strong></h5>
                     <ul class="list-unstyled">
@@ -243,16 +243,16 @@
                     </ul>
                 </div>
             </div>
-			
+
 			@yield('footer')
-			
+
         </div>
     </footer>
-	
+
 	@yield('edit-link')
 
     <!-- jQuery -->
-	
+
 	{!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
@@ -261,11 +261,11 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
-		
+
 		$('a[data-toggle="modal"]').click(function(){
 			window.location.hash = $(this).attr('href');
 		});
-		
+
 		// jQuery for page scrolling feature - requires jQuery Easing plugin
 		$(function() {
 			$('a.page-scroll').bind('click', function(event) {
@@ -276,8 +276,8 @@
 				event.preventDefault();
 			});
 		});
-		
-		
+
+
 		var modalInit = false;
 		function ModalWinInit(){
 			modalWin = '<div id="modalw" class="modalwrap" style="z-index:99999999;display:none;position:fixed;top:0;left:0;padding:0;margin:0;width:100%;height:100%;background-color:rgba(32,32,32,0.7);overflow:hidden;">';
@@ -345,7 +345,7 @@
 			}
 			vidooBox += '<p><a download target="_blank" href="'+file+'">Скачать</a></p>';
 			vidooBox += '</div>';
-			
+
 			return (vidooBox)?vidooBox:false;
 		}
 		function PrintIframe() {
@@ -391,7 +391,7 @@
 			modalFile.on("click",function() {
 				var file = modalFile.attr("href");
 				var opt = modalFile.data() || false;
-				
+
 				opt.mime = (opt.mime)?opt.mime:false;
 				opt.width = (opt.width)?opt.width:($(window).width()-80)||720;
 				opt.height = (opt.height)?opt.height:($(window).height()-80)||480;
@@ -405,7 +405,7 @@
 			modalDoc.on("click",function() {
 				var file = modalDoc.attr("href");
 				var opt = modalDoc.data() || false;
-				
+
 				opt.mime = (opt.mime)?opt.mime:false;
 				opt.width = (opt.width)?opt.width:($(window).width()-80)||720;
 				opt.height = (opt.height)?opt.height:($(window).height()-80)||480;
@@ -419,7 +419,7 @@
 			modalYtb.on("click",function() {
 				var file = modalYtb.attr("href");
 				var opt = modalYtb.data() || false;
-				
+
 				opt.mime = (opt.mime)?opt.mime:false;
 				opt.width = (opt.width)?opt.width:($(window).width()-80)||720;
 				opt.height = (opt.height)?opt.height:($(window).height()-80)||480;
@@ -428,12 +428,12 @@
 				return false;
 			});
 		});
-		
+
 		function SendForm(act,pw,ph) {
 			var w = 640, h = 480;
-			
+
 			//act='http://old.iteam.ru'+act;
-			
+
 			if (document.all || document.layers) {
 				w = screen.availWidth;
 				h = screen.availHeight;
@@ -446,7 +446,7 @@
 			SendWin = window.open(act, 'Action', 'width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ',resizable=yes,scrollbars=yes');
 			if (navigator.appName=='Netscape') { SendWin.focus(); }
 		}
-		
+
     </script>
 	@yield('scripts')
 
@@ -479,8 +479,8 @@
 	</script>
 	<noscript><div><img src="https://mc.yandex.ru/watch/31848061" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	<!-- /Yandex.Metrika counter -->
-	
-	
+
+
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -492,7 +492,7 @@
 
 	</script>
 
-	
+
 
   </body>
 </html>

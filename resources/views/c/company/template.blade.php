@@ -11,7 +11,7 @@
     <meta name="author" content="">
 
     <title>{{ trans('front/site.title') }}</title>
-	
+
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 	<link href="/favicon.ico" rel="icon" type="image/x-icon">
 
@@ -23,9 +23,9 @@
 
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-	
+
 	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+
 	<!-- Web Fonts -->
 	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
@@ -35,7 +35,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	
+
 	@yield('head')
 
 </head>
@@ -55,8 +55,8 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand -page-scroll" href="/">
-				
-					<span class="logo-brand">			
+
+					<span class="logo-brand">
 					<svg id="svg1" style="width:100%;height:100%" fill="#c00" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
 						<g id="svg1g0">
 							<circle id="svg1c0" r="20" cy="70" cx="70"/>
@@ -75,10 +75,10 @@
 						</g>
 					</svg>
 					</span>
-					<span class="name-brand">			
+					<span class="name-brand">
 						<span class="light">i</span>Team
 					</span>
-					
+
                 </a>
             </div>
 
@@ -106,33 +106,33 @@
     </nav>
 
 	@yield('header')
-		
+
 
 	<main>
 		@if(session()->has('ok'))
 			@include('partials/error', ['type' => 'success', 'message' => session('ok')])
-		@endif	
+		@endif
 		@if(isset($info))
 			@include('partials/error', ['type' => 'info', 'message' => $info])
 		@endif
-		
+
 		@yield('main')
-		
+
 	</main>
 
     <!-- Footer -->
     <footer>
-      
+
         <div class="container">
-           
+
             <div class="row">
                 <div class="col-lg-4">
                     <h4><strong>iTeam</strong></h4>
                     <p>Москва, Пресненская наб. 12</p>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (499) 110-2684</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a>
-                        </li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a></li>
+                        <li>Тех поддержка <i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a></li>
                     </ul>
                     <br class="hidden">
                     <ul class="list-inline hidden">
@@ -150,15 +150,15 @@
                     <p class="text-muted">&copy; 2002 - {{ date('Y') }} {{ trans('front/site.title') }}</p>
                 </div>
             </div>
-			
+
 			@yield('footer')
-			
+
         </div>
     </footer>
 
     <!-- jQuery -->
     <!--script src="js/jquery.js"></script-->
-	
+
 	{!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
@@ -201,7 +201,7 @@
 	<!-- begin of Top100 code -->
 	<script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?413929"></script><noscript><img src="http://counter.rambler.ru/top100.cnt?413929" alt="" width="1" height="1" border="0"></noscript>
 	<!-- end of Top100 code -->
-	
+
 	<!-- Yandex.Metrika counter -->
 	<script type="text/javascript">
 		(function (d, w, c) {
@@ -253,7 +253,7 @@
 
 
 	@yield('scripts')
-	
+
 
   </body>
 </html>

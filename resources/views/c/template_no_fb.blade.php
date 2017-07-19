@@ -13,17 +13,17 @@
     <meta property="fb:admins" content="100000287596744"/>
     <meta property="fb:admins" content="100014169376144"/>
     <meta property="fb:app_id" content="1254406184618438" />
-	
+
 	<meta name="_token" content="{!! csrf_token() !!}" />
 
     <title>
 		@yield('title')
 		{{ trans('front/site.title') }}
 	</title>
-	
+
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
 	<link href="/favicon.ico" rel="icon" type="image/x-icon">
-	
+
     <!-- Bootstrap Core CSS -->
 	{!! HTML::style('css/bootstrap.min.css') !!}
     <!-- Custom CSS -->
@@ -32,7 +32,7 @@
     <!-- Custom Fonts -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	
+
 	<!-- Web Fonts -->
 	<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
@@ -42,7 +42,7 @@
         <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	
+
 	@yield('head')
 </head>
 
@@ -82,7 +82,7 @@
 	</script>
 	<noscript><div><img src="https://mc.yandex.ru/watch/30664892" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	<!-- /Yandex.Metrika counter -->
-	
+
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
@@ -91,8 +91,8 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand -page-scroll" href="/">
-				
-					<span class="logo-brand">			
+
+					<span class="logo-brand">
 					<svg id="svg1" style="width:100%;height:100%" fill="#c00" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
 						<g id="svg1g0">
 							<circle id="svg1c0" r="20" cy="70" cx="70"/>
@@ -111,14 +111,14 @@
 						</g>
 					</svg>
 					</span>
-					<span class="name-brand">			
+					<span class="name-brand">
 						<span class="light">i</span>Team
 					</span>
-					
+
                 </a>
-				
+
             </div>
-			
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
@@ -129,19 +129,19 @@
                     <li class="{!! Request::segment(1)==='learn' ? 'active' : '' !!}">
                         <a class="-page-scroll" href="/learn">Мастер-классы</a>
                     </li>
-					
+
                     <li class="{!! Request::segment(2)==='service' ? 'active' : '' !!}">
                         <a class="-page-scroll" href="/company/service">Услуги</a>
                     </li>
-					
+
                     <li class="{!! (Request::segment(1)==='company' && Request::segment(2)!=='service') ? 'active' : '' !!}">
                         <a class="-page-scroll" href="/company/about">Компания</a>
                     </li>
-					
+
                     <li class="{!! Request::segment(2)==='contact' ? 'active' : '' !!}">
                         <a class="-page-scroll" href="/company/contact">Контакты</a>
                     </li>
-					
+
                     <li class="{!! (Request::segment(1)==='i' || Request::segment(1)==='auth') ? 'active' : '' !!}">
                     @if(Auth::user())
                         <span class="dropdown">
@@ -152,9 +152,9 @@
 								<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 							@endif
 							</a>
-							
+
 							<ul class="dropdown-menu" aria-labelledby="userMenu">
-							
+
 								<li class="dropdown-header">{!! Auth::user()->username !!}</li>
 								<li role="separator" class="divider"></li>
 								@if(Auth::user()->role_id<3)
@@ -174,7 +174,7 @@
 						</a>
 					@endif
                     </li>
-                    
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -183,10 +183,10 @@
     </nav>
 
 	@yield('header')
-		
+
 
 	<main>
-		
+
 		<div class="alerts">
 		@if($errors->all())
 			@foreach($errors->all() AS $errr)
@@ -200,10 +200,10 @@
 			@include('partials/error', ['type' => 'danger', 'message' => session('error')])
 		@endif
 		</div>
-		
+
 		@yield('main')
-		
-			
+
+
 	</main>
     <!-- Footer -->
     <footer>
@@ -214,8 +214,8 @@
                     <p>Москва, Пресненская наб. 12</p>
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (499) 110-2684</li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a>
-                        </li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a></li>
+                        <li>Тех поддержка <i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a></li>
                     </ul>
                     <br class="hidden">
                     <ul class="list-inline hidden">
@@ -232,7 +232,7 @@
                     <hr class="--small">
                     <p class="text-muted">&copy; 2002 - {{ date('Y') }} {{ trans('front/site.title') }}</p>
                 </div>
-				
+
                 <div class="col-lg-2 visible-lg -text-right">
                     <h5><strong>Компания</strong></h5>
                     <ul class="list-unstyled">
@@ -259,18 +259,18 @@
 						@endif
                     </ul>
                 </div>
-				
+
             </div>
-			
+
 			@yield('footer')
-			
+
         </div>
     </footer>
-	
+
 	@yield('edit-link')
 
     <!-- jQuery -->
-	
+
 	{!! HTML::script('//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js') !!}
 	<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
@@ -279,11 +279,11 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
-		
+
 		$('a[data-toggle="modal"]').click(function(){
 			window.location.hash = $(this).attr('href');
 		});
-		
+
 		// jQuery to collapse the navbar on scroll
 		function collapseNavbar() {
 			if ($(".navbar").offset().top > 50) {
@@ -313,8 +313,8 @@
 			$('.navbar-toggle:visible').click();
 		  }
 		});
-		
-		
+
+
 		var modalInit = false;
 		function ModalWinInit(){
 			modalWin = '<div id="modalw" class="modalwrap" style="z-index:99999999;display:none;position:fixed;top:0;left:0;padding:0;margin:0;width:100%;height:100%;background-color:rgba(32,32,32,0.7);overflow:hidden;">';
@@ -382,7 +382,7 @@
 			}
 			vidooBox += '<p><a download target="_blank" href="'+file+'">Скачать</a></p>';
 			vidooBox += '</div>';
-			
+
 			return (vidooBox)?vidooBox:false;
 		}
 		function PrintIframe() {
@@ -428,7 +428,7 @@
 			modalFile.on("click",function() {
 				var file = modalFile.attr("href");
 				var opt = modalFile.data() || false;
-				
+
 				opt.mime = (opt.mime)?opt.mime:false;
 				opt.width = (opt.width)?opt.width:($(window).width()-80)||720;
 				opt.height = (opt.height)?opt.height:($(window).height()-80)||480;
@@ -442,7 +442,7 @@
 			modalDoc.on("click",function() {
 				var file = modalDoc.attr("href");
 				var opt = modalDoc.data() || false;
-				
+
 				opt.mime = (opt.mime)?opt.mime:false;
 				opt.width = (opt.width)?opt.width:($(window).width()-80)||720;
 				opt.height = (opt.height)?opt.height:($(window).height()-80)||480;
@@ -456,7 +456,7 @@
 			modalYtb.on("click",function() {
 				var file = modalYtb.attr("href");
 				var opt = modalYtb.data() || false;
-				
+
 				opt.mime = (opt.mime)?opt.mime:false;
 				opt.width = (opt.width)?opt.width:($(window).width()-80)||720;
 				opt.height = (opt.height)?opt.height:($(window).height()-80)||480;
@@ -465,12 +465,12 @@
 				return false;
 			});
 		});
-		
+
 		function SendForm(act,pw,ph) {
 			var w = 640, h = 480;
-			
+
 			//act='http://old.iteam.ru'+act;
-			
+
 			if (document.all || document.layers) {
 				w = screen.availWidth;
 				h = screen.availHeight;
@@ -483,7 +483,7 @@
 			SendWin = window.open(act, 'Action', 'width=' + popW + ',height=' + popH + ',top=' + topPos + ',left=' + leftPos + ',resizable=yes,scrollbars=yes');
 			if (navigator.appName=='Netscape') { SendWin.focus(); }
 		}
-		
+
     </script>
 	@yield('scripts')
 
@@ -516,7 +516,7 @@
 	</script>
 	<noscript><div><img src="https://mc.yandex.ru/watch/31848061" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 	<!-- /Yandex.Metrika counter -->
-	
+
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -528,7 +528,7 @@
 
 	</script>
 
-	
+
 
   </body>
 </html>
