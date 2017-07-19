@@ -431,7 +431,7 @@
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (499) 110-2684</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a></li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a> Тех поддержка</li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a> Техподдержка</li>
 						<li role="separator" class="divider"></li>
                         <li><a href="/company/contact"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Все контакты</a></li>
                     </ul>
