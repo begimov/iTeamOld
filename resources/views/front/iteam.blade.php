@@ -4,39 +4,39 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 	<head>
-	
+
 		<!--meta charset="utf-8" /-->
 		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport">
 		<meta name="robots" content="1" />
 		<title>
-			@yield('title') 
+			@yield('title')
 			{{ trans('front/site.title') }}
 		</title>
 		<!--link href="" rel="canonical"-->
 		<meta content="{{ trans('front/site.title') }}" name="title">
 		<meta content="always" name="referrer">
-	
-		<meta name="keywords" content="{{ $page->meta_keywords ? $page->meta_keywords . ' ' : ($page->title ? $page->title . ' ' : '') }}">
-		<meta name="description" content="{{ $page->meta_description ? $page->meta_description . ' ' : ($page->title ? $page->title . ' ' : '') }}">		
-		<meta name="og:description" content="{{ $page->meta_description ? $page->meta_description . ' ' : ($page->title ? $page->title . ' ' : '') }}">		
 
-		
+		<meta name="keywords" content="{{ $page->meta_keywords ? $page->meta_keywords . ' ' : ($page->title ? $page->title . ' ' : '') }}">
+		<meta name="description" content="{{ $page->meta_description ? $page->meta_description . ' ' : ($page->title ? $page->title . ' ' : '') }}">
+		<meta name="og:description" content="{{ $page->meta_description ? $page->meta_description . ' ' : ($page->title ? $page->title . ' ' : '') }}">
+
+
 		<meta content="@iTeam" name="twitter:site">
 		<!--meta content="summary" name="twitter:card">
 		<meta content="iTeam" name="twitter:app:name:iphone">
 		<meta content="" name="twitter:app:id:iphone">
 		<meta content="iTeam:/" name="twitter:app:url:iphone">
-		
+
 		<meta content="#000000" name="theme-color"-->
-		
+
 		<link href="https://plus.google.com/117555378053181976019" rel="publisher">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 		<!-- Bootstrap Core CSS -->
 		{!! HTML::style('css/bootstrap.min.css') !!}
-	
+
 		@yield('head')
 
 		{!! HTML::style('css/style.css') !!}
@@ -48,10 +48,10 @@
 			{!! HTML::style('https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js') !!}
 			{!! HTML::style('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') !!}
 		<![endif]-->
-		
+
 		<script type="text/javascript" src="//code.jquery.com/jquery-2.1.0.js"></script>
 		<script type="text/javascript" src="//a.iteam.ru/@Tuning/js/jquery/plugins/js.cookie.js"></script>
-		
+
 		<script type="text/javascript" src="/js/js.js?f5=<?=time()?>"></script>
 
 		<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
@@ -60,7 +60,7 @@
 		<!--link href="/apple-touch-icon-precomposed-120.png" rel="apple-touch-icon-precomposed" sizes="120x120"-->
 		<!--link href="/apple-touch-icon-precomposed-76.png" rel="apple-touch-icon-precomposed" sizes="76x76"-->
 		<!--link href="/apple-touch-icon-precomposed.png" rel="apple-touch-icon-precomposed"-->
-		
+
 
 </head>
 
@@ -72,17 +72,17 @@
 	<![endif]-->
 
 	<div id="wrapper">
-	
+
 	@if(session()->has('error'))
 		@include('partials/error', ['type' => 'danger', 'message' => session('error')])
 	@endif
 
 		<div id="header" class="bar--line-bottom">
 			<div class="header-body">
-			
-			
+
+
 				<div class="header-logo-svg">
-				
+
 					<svg id="svg1" width="48" height="48" fill="#c00" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
 						<g id="svg1g0">
 							<circle id="svg1c0" r="20" cy="70" cx="70"/>
@@ -100,11 +100,11 @@
 							<path id="svg1p3" fill="none" stroke="#c00" stroke-width="16" d="M36,34 A47,47 0 0 1 104,34" />
 						</g>
 					</svg>
-				
+
 				</div>
-			
+
 				<div class="header-logo">
-				
+
 				@if(Request::is('/'))
 					<h1 class="iteam_logo_png_36">
 						<span class="iteam_logo_text">{{ trans('front/site.title') }}</span>
@@ -116,15 +116,15 @@
 				@endif
 
 				</div>
-				
-				
+
+
 				<div class="header-subscribe _update">
 						<!-- <a class="toggle"><i class="material-icons">&#xE0BE;</i> <span class="hidden-xs">Подпишитесь на iTeam</span></a> -->
-						
+
 						<a class="toggle"><i class="material-icons">&#xE0BE;</i> <span class="hidden-xs">Вам подарок! Книга "Как внедрить бизнес-процессы".</span></a>
-						
+
 						<div id="subscribe_box" class="toggle_box">
-						    
+
 						    <!--
 							<form class="oldform" accept-charset="utf-8" action="http://app.getresponse.com/add_contact_webform.html?u=Bh5z" method="post" target="_blank" style="width:80%;">
 								<input type="hidden" name="webform_id" value="9340301">
@@ -133,7 +133,7 @@
 								<input type="submit" name="submit" value="👉 Подписаться">
 							</form>
 							-->
-							
+
 								<form action="https://app.getresponse.com/add_subscriber.html" accept-charset="utf-8" method="post">
 	<input class="form-control" style="width:180px; height:30px; border:1px solid grey;margin-bottom:5px; text-align:center; font-size:14px;" type="text" name="first_name" placeholder="Имя" required/>
 	<input class="form-control" style="width:180px; height:30px; border:1px solid grey;margin-bottom:5px; text-align:center; font-size:14px;" type="text" name="email" placeholder="Email" required/>
@@ -143,11 +143,11 @@
 	<input type="hidden" name="forward_data" value="" />
 	<input style="width:180px; height:34px; border:none; border-radius:4px; margin-bottom:5px;background-color:#AD0011 !important;color:#fff;font-weight:bold;font-size:14px;" type="submit" value="ПОЛУЧИТЬ"/>
 </form>
-							
+
 							<a class="closer closer-smallicon" href="#subscribe_box" title="Закрыть это окно">Закрыть</a>
 						</div>
 				</div>
-				
+
 				<nav class="header-nav header-nav-css">
 					<ul>
 						<li>
@@ -326,7 +326,7 @@
 						</li>
 					</ul>
 				</nav>
-				
+
 				<div class="header-auth _css_float--right navbar-right">
 				@if(Auth::user())
 					<span class="dropdown">
@@ -337,9 +337,9 @@
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 						@endif
 						</a>
-						
+
 						<ul class="dropdown-menu" aria-labelledby="userMenu">
-						
+
 							<li class="dropdown-header">{!! Auth::user()->username !!}</li>
 							<li role="separator" class="divider"></li>
 
@@ -347,7 +347,7 @@
 								<li><a href="/~">Управление</a></li>
 								<li role="separator" class="divider"></li>
 							@endif
-							
+
 							<li><a href="/i">Профиль</a></li>
 							<li><a href="/i/order">Мои заказы</a></li>
 							<!--li><a href="/i/#settings">Настройки</a></li-->
@@ -360,8 +360,8 @@
 						<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
 					</a>
 				@endif
-				</div>					
-				
+				</div>
+
 				<div class="header-search _css_float--right">
 					<form id="cse-search-box" class="search-form" action="/search">
 						<input type="hidden" name="siteurl" value="">
@@ -374,54 +374,54 @@
 						<button type="submit" name="sa" value="🔍"><i class="material-icons">&#xE8B6;</i></button>
 					</form>
 				</div>
-				
+
 			</div>
 		</div>
 
 
 		@yield('header')
-		
-	
+
+
 	<div class="clear"></div>
-	
+
 	<div id="layout">
-	
+
 		<main role="main" class="container">
-		    
-		    
-		    
+
+
+
 			@if(session()->has('ok'))
 				@include('partials/error', ['type' => 'success', 'message' => session('ok')])
-			@endif	
+			@endif
 			@if(isset($info))
 				@include('partials/error', ['type' => 'info', 'message' => $info])
 			@endif
-			
+
 			@yield('main')
-			
-			
+
+
 
 		</main>
-		
+
 		@yield('bottom')
 
 		<?#require('sidebar.php');?>
 		@include('front.sidebar')
 
-				
+
 		<div id="footer">
-		
-		
-		
-		
-							
-		
-	
-		
-		
-		
+
+
+
+
+
+
+
+
+
+
 			@if(Auth::user() && Auth::user()->id===1)
-				
+
 			<div class="footer-body">
 			<div class="container">
 			<div class="row">
@@ -431,6 +431,7 @@
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (499) 110-2684</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a></li>
+                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a> Тех поддержка</li>
 						<li role="separator" class="divider"></li>
                         <li><a href="/company/contact"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Все контакты</a></li>
                     </ul>
@@ -447,7 +448,7 @@
                         </li>
                     </ul>
                 </div>
-				
+
                 <div class="col-md-2 col-md-offset-1 visible-lg visible-md -text-right">
                     <h5 class="-hidden"><strong>Компания</strong></h5>
                     <ul class="list-unstyled">
@@ -465,14 +466,14 @@
                         <li><a href="/learn/course">Мастер-проекты</a></li>
                     </ul>
                 </div>
-				
+
             </div>
             </div>
             </div>
-			
+
 			@else
-				
-			<div class="footer-body"> 
+
+			<div class="footer-body">
 			&copy; iTeam 2002-{{ date('Y') }}  <a href="http://iteam.ru/company" title="iTeam" target="_blank">О компании</a>
 <style type="text/css">
 #toTop {
@@ -502,14 +503,14 @@ opacity:0.7;
 $(function() {$(window).scroll(function() {if($(this).scrollTop() != 0) {$('#toTop').fadeIn();} else {$('#toTop').fadeOut();}});$('#toTop').click(function() {$('body,html').animate({scrollTop:0},800);});});
 </script>
 <div id="toTop">Наверх</div>
-		
+
 			</div>
-			
+
 			@endif
 		</div>
-		
+
 	</div>
-	
+
 <!--	<div id="goodbye" class="blur_fon">
 		<div class="goodbye_content">
 			<h2>Вам подарок!</h2>
@@ -527,9 +528,9 @@ $(function() {$(window).scroll(function() {if($(this).scrollTop() != 0) {$('#toT
 			<a class="closer closer-icon" href="#goodbye" title="Закрыть это окно">Закрыть</a>
 		</div>
 	</div>
-	
+
 	-->
-	
+
 		<div id="goodbye" style="z-index:9999999;" class="blur_fon">
 		<div class="goodbye_content">
 			<h2>Вам подарок!</h2>
@@ -552,10 +553,10 @@ $(function() {$(window).scroll(function() {if($(this).scrollTop() != 0) {$('#toT
 			<a class="closer closer-icon" href="#goodbye" title="Закрыть это окно">Закрыть</a>
 		</div>
 	</div>
-	
 
 
-<!------------------------------------------------------------------------------------>	
+
+<!------------------------------------------------------------------------------------>
 	<?php if(isset($user) && @$user->role_id<2):#{?>
 		<div style="display:none;position:fixed;bottom:0;left:0;width:24px;height:24px;z-index:99999;background-color:rgba(255,255,255,1);">
 		<a id="edit" href="#" target="_blank">
@@ -563,10 +564,10 @@ $(function() {$(window).scroll(function() {if($(this).scrollTop() != 0) {$('#toT
 		</a>
 		</div>
 	<?php endif;#}?>
-	
+
     <!-- Bootstrap Core JavaScript -->
 	{!! HTML::script('js/bootstrap.min.js') !!}
-	
+
 	<!-- begin of Top100 code -->
 	<script id="top100Counter" type="text/javascript" src="http://counter.rambler.ru/top100.jcn?413929"></script><noscript><img src="http://counter.rambler.ru/top100.cnt?413929" alt="" width="1" height="1" border="0"></noscript>
 	<!-- end of Top100 code -->
@@ -608,10 +609,10 @@ $(function() {$(window).scroll(function() {if($(this).scrollTop() != 0) {$('#toT
 		ga('create', 'UA-62052326-1', 'auto');
 		ga('send', 'pageview');
 	</script>
-	
+
 	@yield('scripts')
-	
-<script type="text/javascript" src="//consultsystems.ru/script/35370/" async charset="utf-8"></script>	
-	
+
+<script type="text/javascript" src="//consultsystems.ru/script/35370/" async charset="utf-8"></script>
+
 	</body>
 </html>
