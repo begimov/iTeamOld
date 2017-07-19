@@ -1,19 +1,19 @@
 @extends('c.template_no_fb')
 
 @section('title')
-	Профиль | 
+	Профиль |
 @stop
 
 @section('main')
 
     <section class="content">
 		<div class="container">
-			
+
 			<br class="temp-correct">
 
 			<div class="row">
 				<div class="box">
-				
+
 					<div class="col-lg-2 col-sm-2">
 						<ul class="nav nav-pills nav-stacked">
 							<li role="presentation" class="active">
@@ -35,11 +35,17 @@
 								</a>
 							</li>
 						</ul>
+
+                        <div class="alert alert-info">
+                            <a href="mailto:support@iteam.ru" style="text-align: center;">
+                                <span class="hidden-sm">Написать в&nbsp;техподдержку</span>
+                            </a>
+                        </div>
 					</div>
-					
+
 					<div class="col-lg-10 col-sm-10">
-					
-					
+
+
 	<!-- Tab panes -->
 	<div class="tab-content">
 
@@ -65,7 +71,7 @@
 							</label>
 							{!! Form::submit('Сохранить', ['','hidden btn btn-sm btn-success']) !!}
 						</div>
-					
+
 					</div>
 					<div class="col-lg-9 col-sm-9">
 						<div class="row">
@@ -76,13 +82,13 @@
 								{!! Form::group('text', 'firstname', $errors, null, null, 'apple', null, ['placeholder'=>'Имя'], 'visible[firstname]') !!}
 								{!! Form::group('text', 'lastname', $errors, null, null, 'tree-deciduous', null, ['placeholder'=>'Фамилия'], 'visible[lastname]') !!}
 								{!! Form::group('textarea', 'about', $errors, null, null, 'education', null, ['placeholder'=>'О себе']) !!}
-								
+
 								{!! Form::submit('Сохранить', ['','btn btn-lg btn-primary']) !!}
 								<hr>
 								{!! Form::group('password', 'password', $errors, 'Смена пароля', null, 'lock', 'eye-open show-password', ['placeholder'=>'Пароль', 'minlength'=>6, 'maxlength'=>32, 'data-toggle'=>'tooltip', 'data-placement'=>'top', 'title'=>'Только латинские буквы, цифры или знаки _@#$%^&*-. От 6 до 32 символов']) !!}
 								{!! Form::group('password', 'password_confirmation', $errors, null, null, 'lock', 'eye-open show-password', ['placeholder'=>'Подтвердите пароль', 'minlength'=>6, 'maxlength'=>32, 'data-toggle'=>'tooltip', 'data-placement'=>'top', 'title'=>'Точно, как в предыдущем поле']) !!}
-																	
-								
+
+
 							</div>
 							<div class="col-lg-6 col-sm-6">
 								{!! Form::group('text', 'contacts', $errors, null, null, ['<span class="glyphicon glyphicon-link" aria-hidden="true"></span>','http://'], null, ['placeholder'=>'Сайт'], 'visible[url]') !!}
@@ -134,7 +140,7 @@
 								{!! Form::group('text', 'region', $errors, null, null, 'flag', null, ['placeholder'=>'Регион'], 'visible[region]') !!}
 								{!! Form::group('text', 'city', $errors, null, null, 'home', null, ['placeholder'=>'Город'], 'visible[city]') !!}
 								{!! Form::group('textarea', 'adress', $errors, null, null, 'map-marker', null, ['placeholder'=>'Адрес'], 'visible[adress]') !!}
-								
+
 							</div>
 						</div>
 						{!! Form::submit('Сохранить', ['','btn btn--lg btn-primary']) !!}
@@ -142,16 +148,16 @@
 				{!! Form::close() !!}
 			</div>
 		</div>
-		
-		
+
+
 		<div role="tabpanel" class="tab-pane" id="settings">
 		</div>
-		
+
 	</div>
-					
-					
+
+
 					</div>
-				
+
 				</div>
 			</div>
 
@@ -174,7 +180,7 @@
 				//}
 				$(e).html(moment($(e).data('date')).calendar());
 			});
-		
+
 			function validateEmail(email) {
 				var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 				return re.test(email);
@@ -198,12 +204,12 @@
 					confirmation = input.is('[name="password_confirmation"]') ? $('[name="password"]').val() : false,
 					val = input.val(),
 					vallength = val.length;
-					
+
 				if(required && !vallength) {
 					input.attr('data-original-title', (input.data('required-error') || 'Это поле обязательно к заполнению'));
 				}
 				else ok = 1;
-				
+
 				if(minlength && vallength<minlength) {
 					ok = 0;
 					input.attr('data-original-title', (input.data('minlength-error') || 'Минимальная длина поля: ' +minlength+  ' символов'));
@@ -232,15 +238,15 @@
 				}
 				return ok;
 			}
-			
+
 			$('input[data-toggle="tooltip"]').on('focus',function(){
 				$(this).tooltip('show');
 			});
-			
+
 			$('input[name="avatar"]').on('change', function(e) {
 				$(this).parent('div').parent('label').next('div').children('input[type="submit"]').removeClass('hidden');
 			});
-			
+
 			$('form.validate input').on('keyup change paste', function(e) {
 				var input = $(this), ok = validateInput(input), tt = input.is('[data-toggle="tooltip"]');
 				if(!ok){
@@ -252,21 +258,21 @@
 					if(tt) input.tooltip('hide');
 				}
 			});
-		
+
 			$('form.validate').on('submit', function(e) {
-				
+
 				var form = $(this), errors = 0;
 				if(form.not('.is-valid')) {
-					
+
 					var inputs = $('input[required]',form), errors = inputs.size();
 					var vallength = 0;
-					
+
 					inputs.each(function(){
 						var input = $(this),
 							ok = validateInput(input);
 						errors -= ok;
 					});
-					
+
 					if(!errors){
 						form.addClass('is-valid').submit();
 						//alert('ok');
@@ -279,11 +285,11 @@
 						e.preventDefault();
 						return false;
 					}
-					
+
 				}
-				
+
 			});
-			
+
 			$('.show-password').on('click',function(){
 				var showPassword = $(this);
 				if(showPassword.is('.glyphicon-eye-open')) {
@@ -293,14 +299,14 @@
 					showPassword.removeClass('glyphicon-eye-close').addClass('glyphicon-eye-open').parent('.input-group-addon').prev('input').attr('type','password');
 				}
 			});
-			
+
 			var windowHash = window.location.hash, tab = $('.tab-content').find(windowHash);
 			if(tab){
 				//tab.tabs('show');
 				$('.nav-pills li a[href="'+windowHash+'"]').tab('show');
 				$('body,html').animate({scrollTop: 0}, 10);
 			}
-			
+
 		})(jQuery);
 	</script>
 @stop

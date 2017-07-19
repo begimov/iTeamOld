@@ -19,4 +19,10 @@
 								</a>
 							</li>
 						</ul>
+
+                        <div class="alert alert-info">
+                            <a href="mailto:support@iteam.ru" style="text-align: center;">
+                                <span class="hidden-sm">Написать в&nbsp;техподдержку</span>
+                            </a>
+                        </div>
 					</div>
