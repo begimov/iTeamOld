@@ -17,6 +17,7 @@
 					@if($orders)
 					{{ $orders->count() . ' на странице на сумму ' . $orders->sum('sum') . '; период поиска: ' . ($daterange = Request::input('daterange') ? Request::input('daterange') : date('d.m.Y', strtotime('-3 year')) .' - '. date('d.m.Y')) }}
 					@endif
+					{{--{{$orders->sum('fact_sum') + $orders->sum('sum')}}--}}
 				</h2>
 				<form class="search">
 				<div class="lvh-search">

@@ -116,7 +116,11 @@
 				@endif
 
 				</div>
-
+				<div class="header-description" style="float: left;font-size: 14px;line-height: 1;      padding-left: 14px;  margin-top: -4px;">
+                <div class="header-description-title">МАСТЕРСКАЯ УПРАВЛЕНИЯ</div>
+                <div class="header-description-desc" style="font-style: italic;font-weight: 300;margin-top: 4px;line-height: 1.2;">«Консультируем и обучаем<br>собственников и топ-менеджеров<br>управлять компанией»
+                </div>
+            </div>
 
 				<div class="header-subscribe _update">
 						<!-- <a class="toggle"><i class="material-icons">&#xE0BE;</i> <span class="hidden-xs">Подпишитесь на iTeam</span></a> -->
@@ -148,6 +152,67 @@
 						</div>
 				</div>
 
+
+				<div class="header-auth _css_float--right navbar-right">
+				@if(Auth::user())
+					<span class="dropdown">
+						<a href="/i" class="dropdown-toggle img-circle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						@if(Auth::user()->avatar)
+							<img style="max-width:32px;max-height:32px;border:1px solid gray;" src="/filemanager/userfiles/user{{ Auth::user()->id }}/100/{!! Auth::user()->avatar !!}" alt="iam" class="img-circle">
+						@else
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						@endif
+						</a>
+
+						<ul class="dropdown-menu" aria-labelledby="userMenu">
+
+							<li class="dropdown-header">{!! Auth::user()->username !!}</li>
+							<li role="separator" class="divider"></li>
+
+							@if(Auth::user()->role_id<3)
+								<li><a href="/~">Управление</a></li>
+								<li role="separator" class="divider"></li>
+							@endif
+
+							<li><a href="/i">Профиль</a></li>
+							<li><a href="/i/order">Мои заказы</a></li>
+							<!--li><a href="/i/#settings">Настройки</a></li-->
+							<li role="separator" class="divider"></li>
+							<li><a href="/auth/logout">Выход</a></li>
+						</ul>
+					</span>
+				@else
+					<a href="/auth/login" id="userLink" class="auth-link img-circle">
+						<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+					</a>
+				@endif
+				</div>
+
+				<div class="header-search _css_float--right">
+					<form id="cse-search-box" class="search-form" action="/search">
+						<input type="hidden" name="siteurl" value="">
+						<input type="hidden" name="ref" value="">
+						<input type="hidden" name="ss">
+						<input type="hidden" value="partner-pub-2457866150117626:somrxulncq7" name="cx">
+						<input type="hidden" value="FORID:9" name="cof">
+						<input type="hidden" value="utf-8" name="ie">
+						<input type="text" size="20" autocomplete="off" id="q" name="q" spellcheck="false">
+						<button type="submit" name="sa" value="🔍"><i class="material-icons">&#xE8B6;</i></button>
+					</form>
+				   </div>
+				   	<div class="header-in-out">
+                <a href="https://iteam.ru/i/auth" class="btn">войти</a>
+                <a href="https://iteam.ru/i/auth" class="btn">регистрация</a></div>
+                   <div class="header-contact-info">
+                <div class="header-contact-info-title">
+                    <a href="tel:+74991102684">+7 (499) 110 26 84</a>
+                </div>
+<!--                <a href="#" class="header-contact-info-desc" style="pointer-events: none;">Online консультант</a>-->
+                </div>
+
+
+			</div>
+				<div class="header-bottom">
 				<nav class="header-nav header-nav-css">
 					<ul>
 						<li>
@@ -325,57 +390,7 @@
 							<a href="//iteam.ru/company/contact">Контакты</a>
 						</li>
 					</ul>
-				</nav>
-
-				<div class="header-auth _css_float--right navbar-right">
-				@if(Auth::user())
-					<span class="dropdown">
-						<a href="/i" class="dropdown-toggle img-circle" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						@if(Auth::user()->avatar)
-							<img style="max-width:32px;max-height:32px;border:1px solid gray;" src="/filemanager/userfiles/user{{ Auth::user()->id }}/100/{!! Auth::user()->avatar !!}" alt="iam" class="img-circle">
-						@else
-							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-						@endif
-						</a>
-
-						<ul class="dropdown-menu" aria-labelledby="userMenu">
-
-							<li class="dropdown-header">{!! Auth::user()->username !!}</li>
-							<li role="separator" class="divider"></li>
-
-							@if(Auth::user()->role_id<3)
-								<li><a href="/~">Управление</a></li>
-								<li role="separator" class="divider"></li>
-							@endif
-
-							<li><a href="/i">Профиль</a></li>
-							<li><a href="/i/order">Мои заказы</a></li>
-							<!--li><a href="/i/#settings">Настройки</a></li-->
-							<li role="separator" class="divider"></li>
-							<li><a href="/auth/logout">Выход</a></li>
-						</ul>
-					</span>
-				@else
-					<a href="/auth/login" id="userLink" class="auth-link img-circle">
-						<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
-					</a>
-				@endif
-				</div>
-
-				<div class="header-search _css_float--right">
-					<form id="cse-search-box" class="search-form" action="/search">
-						<input type="hidden" name="siteurl" value="">
-						<input type="hidden" name="ref" value="">
-						<input type="hidden" name="ss">
-						<input type="hidden" value="partner-pub-2457866150117626:somrxulncq7" name="cx">
-						<input type="hidden" value="FORID:9" name="cof">
-						<input type="hidden" value="utf-8" name="ie">
-						<input type="text" size="20" autocomplete="off" id="q" name="q" spellcheck="false">
-						<button type="submit" name="sa" value="🔍"><i class="material-icons">&#xE8B6;</i></button>
-					</form>
-				</div>
-
-			</div>
+				</nav></div>
 		</div>
 
 
@@ -386,7 +401,7 @@
 
 	<div id="layout">
 
-		<main role="main" class="container">
+		<main role="main" class="container" style="max-width:960px;">
 
 
 
@@ -431,7 +446,6 @@
                     <ul class="list-unstyled">
                         <li><i class="fa fa-phone fa-fw"></i> (499) 110-2684</li>
                         <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:info@iteam.ru">info@iteam.ru</a></li>
-                        <li><i class="fa fa-envelope-o fa-fw"></i>  <a href="mailto:support@iteam.ru">support@iteam.ru</a> Техподдержка</li>
 						<li role="separator" class="divider"></li>
                         <li><a href="/company/contact"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Все контакты</a></li>
                     </ul>
@@ -474,7 +488,8 @@
 			@else
 
 			<div class="footer-body">
-			&copy; iTeam 2002-{{ date('Y') }}  <a href="http://iteam.ru/company" title="iTeam" target="_blank">О компании</a>
+			&copy; iTeam 2002-{{ date('Y') }}  <a href="http://iteam.ru/company" title="iTeam" target="_blank">О компании</a><br />
+				<a href="https://iteam.ru/company/terms">Пользовательское соглашение</a>
 <style type="text/css">
 #toTop {
  float:left;
@@ -612,7 +627,7 @@ $(function() {$(window).scroll(function() {if($(this).scrollTop() != 0) {$('#toT
 
 	@yield('scripts')
 
-<script type="text/javascript" src="//consultsystems.ru/script/35370/" async charset="utf-8"></script>
+{{--<script type="text/javascript" src="//consultsystems.ru/script/35370/" async charset="utf-8"></script>	--}}
 
 	</body>
 </html>

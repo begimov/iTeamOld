@@ -55,6 +55,13 @@ class HomeController extends Controller
             $countArticles = count(Articles::all());
             $countLearns = count(Learn::all());
 
+            if ($user = auth()->user()) {
+                if ($user->email === 'amelihovv@ya.ru') {
+//                    dump($pack);
+//                    dd($page);
+                }
+            }
+
 			return view($pack, compact(
                 'page',
                 'childrens',

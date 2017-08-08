@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $affix = '<br><br>Удачи и хорошего настроения!<hr>С уважением,<br>Марина Ступакова<br>Консалтинговая компания iTeam<br>Тел. +7 (499) 110-26-84<br><a href="https://iteam.ru">iTeam.ru</a>';
+        $affix = '<br><br>Удачи и хорошего настроения!<hr>С уважением,<br>Дари Лебедкина<br>Консалтинговая компания iTeam<br>Тел. +7 (499) 110-26-84<br><a href="https://iteam.ru">iTeam.ru</a>';
 
         $orders = Order::with(['learn', 'user'])
             ->where('status', '<', 1)
@@ -107,7 +107,7 @@ class OrderController extends Controller
                     $mail['title'] = $uname . ', здравствуйте!';
                     $mail['text'] = 'Пять дней назад Вы сделали заказ материалов на тему <b>«' . $order->learn->title . '»</b>.<br>
 На данный момент Ваш заказ не оплачен.<br>
-Счет на оплату Вы можете повторно получить по ссылке <a href="https://iteam.ru/i/order/' . $order->id . '">https://iteam.ru/i/order/' . $order->id . '</a> (для входа в Личный кабинет укажите этот Email и Ваш пароль).<br>
+Счет на оплату Вы можете повторно получить <a href="https://iteam.ru/i/order/' . $order->id . '">по ссылке </a> (для входа в Личный кабинет укажите этот Email и Ваш пароль).<br>
 ' . $uname . ', если Вы передумали покупать видеокурс, напишите мне, пожалуйста. Я аннулирую Ваш заказ и не буду беспокоить Вас звонками и письмами.' . $affix;
 
                     $send = Mail::send('emails.auth.template', $mail, function ($m) use ($order) {
@@ -133,7 +133,7 @@ class OrderController extends Controller
                     $mail['text'] = 'Пару часов назад Вы сделали заказ материалов на тему <b>«' . $order->learn->title . '»</b>.<br>
 Спасибо Вам за это!<br><br>
 Однако Ваш заказ остался не оплачен.<br>
-Чтобы завершить заказ, пройдите по ссылке <a href="https://iteam.ru/i/order/' . $order->id . '">https://iteam.ru/i/order/' . $order->id . '</a> (для входа в Личный кабинет укажите этот Email и Ваш пароль).<br>
+Чтобы завершить заказ, пройдите <a href="https://iteam.ru/i/order/' . $order->id . '">по ссылке </a> (для входа в Личный кабинет укажите этот Email и Ваш пароль).<br>
 ' . $uname . ', если у Вас возникли какие-то технические проблемы, напишите или позвоните мне, пожалуйста. Мы их обязательно решим.' . $affix;
 
                     $send = Mail::send('emails.auth.template', $mail, function ($m) use ($order) {
@@ -156,7 +156,7 @@ class OrderController extends Controller
                     $mail['title'] = $uname . ', здравствуйте!';
                     $mail['text'] = 'Два дня назад Вы сделали заказ материалов на тему <b>«' . $order->learn->title . '»</b>.<br>
 На данный момент Ваш заказ не оплачен.<br>
-Чтобы завершить заказ, пройдите по ссылке <a href="https://iteam.ru/i/order/' . $order->id . '">https://iteam.ru/i/order/' . $order->id . '</a> (для входа в Личный кабинет укажите этот Email и Ваш пароль).<br>
+Чтобы завершить заказ, пройдите <a href="https://iteam.ru/i/order/' . $order->id . '">по ссылке </a> (для входа в Личный кабинет укажите этот Email и Ваш пароль).<br>
 ' . $uname . ', если Вы передумали покупать видеокурс, напишите мне, пожалуйста. Я аннулирую Ваш заказ и не буду беспокоить Вас звонками и письмами.' . $affix;
 
                     $send = Mail::send('emails.auth.template', $mail, function ($m) use ($order) {

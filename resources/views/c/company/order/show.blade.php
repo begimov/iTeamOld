@@ -49,10 +49,21 @@
                                         <p class="status status{!! $order->status !!}" data-status="{!! $order->status !!}">
                                             <span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span>
 
-                                            @if(isset($order->learn->price))
-                                                <span class="nowrap">{!! $order->learn->price>0 ? HTML::priceFormatHtml($order->sum, $order->learn->currensy) : 'Бесплатно' !!}</span>
+                                            {{--@if(isset($order->learn->price))--}}
+                                                {{--<span class="nowrap">{!! $order->learn->price>0 ? HTML::priceFormatHtml($order->sum, $order->learn->currensy) : 'Бесплатно' !!}</span>--}}
+                                            {{--@else--}}
+                                                {{--<span class="nowrap">{!! $order->test->price>0 ? HTML::priceFormatHtml($order->sum, $order->currensy) : 'Бесплатно' !!}</span>--}}
+                                            {{--@endif--}}
+
+
+                                            @if($order->fact_sum == 0)
+                                                <span class="nowrap">
+                                                  {!! $order->learn->price>0 ? HTML::priceFormatHtml(@$order->learn->price, $order->learn->currensy) : 'Бесплатно' !!}
+                                              </span>
                                             @else
-                                                <span class="nowrap">{!! $order->test->price>0 ? HTML::priceFormatHtml($order->sum, $order->currensy) : 'Бесплатно' !!}</span>
+                                                <span class="nowrap">
+                                                  {!! $order->fact_sum !!}
+                                              </span>
                                             @endif
 
                                             <span class="label label-default">
@@ -113,7 +124,7 @@
                                                 </div>
 
                                                 <div id="about_payment_sberbank" class="pay_screen payment_type-sberbank" style="{{ ($order->payment_type==='sberbank') ? 'display:block;' : 'display:none;' }}">
-                                                    <p><b>Шаг 1</b>. Пожалуйста, осуществите перевод с Вашей карты Сбербанка на карту № <b>639002389040808453</b> (на имя Ступаковой Марины Владиславовны) через Сбербанк.Онлайн или отделение банка</p>
+                                                    <p><b>Шаг 1</b>. Пожалуйста, осуществите перевод с Вашей карты Сбербанка на карту № <b>4817760064429115</b> (на имя Ступаковой Марины Владиславовны) через Сбербанк.Онлайн или отделение банка</p>
                                                     <p><b>Шаг 2</b>. Обязательно напишите нам на адрес <b>info@iteam.ru</b>, указав номер и Ваши имя и фамилию</p>
                                                 </div>
 
