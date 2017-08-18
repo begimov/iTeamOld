@@ -1,6 +1,6 @@
 <?php
 
-URL::forceSchema('https');
+// URL::forceSchema('https');
 
 Route::get('pay/ya_demo/{id}', 'Site\O@testYaKassa');
 Route::post('pay/ya_demo/{id}', 'Site\O@testYaKassa');
@@ -376,8 +376,12 @@ Route::get('company/business-club', function() {
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::group(['domain' => 'iteam.ru'], function()
+    Route::group(['domain' => 'old.iteam.app'], function()
     {
+        Route::group(['prefix' => 'walletone'], function () {
+          Route::post('/', ['as' => 'walletone.incoming.transaction', 'uses' => 'Walletone\WalletoneController@proccessIncomingTransaction']);
+        });
+
         Route::get('companies', ['as' => 'companies.index', 'uses' => 'CompaniesController@index']);
 
         Route::post('send-question', ['as' => 'site.learn.send-question', 'uses' => 'Learn\LearnController@sendQuestion']);

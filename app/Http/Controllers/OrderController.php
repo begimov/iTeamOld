@@ -59,6 +59,7 @@ class OrderController extends Controller
      */
     public function create(Request $request, Learn $learn_m)
     {
+
         $_redirect = $request->input('_redirect') ? $request->input('_redirect') : redirect()->back();
 
         $user = $this->user;
@@ -131,6 +132,7 @@ class OrderController extends Controller
      */
     public function store(Request $request, Learn $learn_m)
     {
+
         $_redirect = $request->input('_redirect') ? $request->input('_redirect') : redirect()->back();
 
         $user = $this->user;

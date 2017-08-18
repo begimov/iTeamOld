@@ -3,6 +3,7 @@
 	<div class="col-lg-12 tab-title text-center">
 		<p class="lead">Выберите способ оплаты</p>
 	</div>
+
 	{{ Form::open(['route' => ( @$page ? 'orders.store' : ['orders.update', $order->product_id] )]) }}
 	<div class="col-lg-6">
 		<div class="list-group">
@@ -30,6 +31,12 @@
 				<h4 class="list-group-item-heading">Перевод на карту Сбербанк</h4>
 				<p class="list-group-item-text">Узнайте номер карты для перевода через Сбербанк.Онлайн или отделение банка</p>
 			</label>
+			<label href="#" class="payment-change label-button list-group-item {{ ($order && $order->payment_type === 'walletone') ? 'active' : '' }}">
+				<input type="radio" name="payment_type" value="walletone" class="hidden" {{ ($order && $order->payment_type === 'walletone') ? 'checked' : '' }}>
+				<span class="image-left"><img src="/img/visa_icon.png"></span>
+				<h4 class="list-group-item-heading">walletone</h4>
+				<p class="list-group-item-text">Оплатите онлайн через walletone</p>
+			</label>
 		</div>
 	</div>
 
@@ -55,11 +62,11 @@
 			</label>
 		</div>
 	</div>
-	
+
 	@if($user)
 		{{ Form::hidden('product_id',(@$page ? $page->id : $order->product_id)) }}
 	@endif
-	
+
 	{{ Form::close() }}
 
 </div>

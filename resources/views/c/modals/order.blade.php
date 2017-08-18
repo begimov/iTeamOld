@@ -18,11 +18,11 @@
 					<div role="tabpanel" class="tab-pane active" id="payment_method">
 						@include('c.o.payments')
 					</div>
-					
+
 					<div role="tabpanel" class="tab-pane disabled" id="checkout">
 						@include('c.o.confirms')
 					</div>
-					
+
 				</div>
 
 			</div>

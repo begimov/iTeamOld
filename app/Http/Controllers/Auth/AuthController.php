@@ -37,7 +37,7 @@ class AuthController extends Controller
 		$this->middleware('ajax', ['only' => ['postAuthAjax','postLoginAjax','postRegisterAjax']]);
 	}
 
-	
+
 	public function getAuth()
 	{
 		return view('auth.auth');
@@ -56,8 +56,9 @@ class AuthController extends Controller
 	}
 	public function postAuth(Request $request)
 	{
+
 		$out = ['msg'=>'','error'=>true,'sendmail'=>false,'redirect'=>false];
-			
+
 		$email = $request->input('email') ? $request->input('email') : false;
 		$out['redirect'] = $request->input('_redirect') ? $request->input('_redirect') : false;
 		$password = $request->input('password') ? $request->input('password') : false;
@@ -95,51 +96,51 @@ class AuthController extends Controller
 							if(!$user->confirmed) $user->confirmed = 1;
 							$user->confirmation_code = null;
 							$user->save();
-							
+
 							$out['error'] = false;
-							
+
 							$out['msg'] = 'Добро пожаловать, '.$uname.'!';
 						}
-						
+
 					}
-					
+
 				}
 				else {
-					
+
 					$user->confirmation_code = str_random(30);
 					$user->save();
 					$out['sendmail'] = Mail::send('emails.auth.template', ['title'=>'Быстрый вход','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.route('email.get',['email'=>$user->email, 'confirm'=>$user->confirmation_code]) . ($out['redirect'] ? '?_redirect='.$out['redirect'] : '').'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small>'], function ($m) use ($user) {
 						$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 					});
 					$out['error'] = false;
-					
+
 					$out['msg'] = 'Проверьте Ваш почтовый ящик: Вам отправлено письмо со ссылкой для входа';
 				}
 			}
 			else {
-				
+
 				$user = new User;
-				
+
 				$name = $request->input('name') ? $request->input('name') : false;
 				$phone = $request->input('phone') ? $request->input('phone') : false;
 				$username = $request->input('login') ? $request->input('login') : false;
-				
+
 				if(!$username) {
-					
+
 					$parse_email = explode('@', $email);
 					$username = array_shift( $parse_email );
-					
+
 					$check_username = $user->where('username','LIKE',$username)->first();
 					if($check_username) $username .= '_'. substr( md5(time()), 2, 4);
-					
+
 				}
-				
+
 				if(!$password) {
 					$password = substr( crypt( md5( time() . $username ) , time() ), 2, 6);
 					$out['error'] = false;
 				}
 				else {
-					
+
 					if(strlen($password) < 6) {
 						$out['msg'] = 'Пароль должен быть > 6 символов';
 					}
@@ -153,66 +154,66 @@ class AuthController extends Controller
 						$out['error'] = false;
 					}
 				}
-				
+
 				if(!$out['error']) {
-					
+
 					$user->email = $email;
 					$user->username = $username;
 					$user->password = bcrypt($password);
-					
+
 					if($name) $user->name = $name;
 					if($phone) $user->phone = $phone;
-					
+
 					$role = Role::where('slug', 'user')->select('id')->first();
 					$user->role_id = $role->id;
 					$user->confirmation_code = str_random(30);
 					$user->save();
-					
+
 					$out['sendmail'] = Mail::send('emails.auth.template', ['title'=>'Быстрая Регистрация','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.url('auth/email/'.$user->email.'/'.$user->confirmation_code . ($out['redirect'] ? '?_redirect='.$out['redirect'] : '')).'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small><br><hr><br>В дальнейшем Вы можете использовать <a href="'.url('i').'">вход по паролю</a>.<br>Ваш пароль: <b>'.$password.'</b><br>'], function ($m) use ($user) {
 						$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 					});
-					
+
 					$out['msg'] = 'Проверьте Ваш почтовый ящик: Вам отправлено письмо со ссылкой для входа';
-					
+
 				}
-				
+
 			}
-			
+
 		}
 		else {
 			$out['msg'] = 'Укажите корректный Email';
 		}
 
 		$redirect = ($out['redirect']) ? redirect($out['redirect']) : redirect()->back();
-		return ($out['error']) ? $redirect->with('error',$out['error'])->withInput() : (($out['msg']) ? $redirect->with('status',$out['msg']) : $redirect);	
+		return ($out['error']) ? $redirect->with('error',$out['error'])->withInput() : (($out['msg']) ? $redirect->with('status',$out['msg']) : $redirect);
 	}
 
 	public function postAuthAjax(Request $request, Guard $auth)
 	{
 		if($request->ajax()) {
-			
+
 			$out = ['msg'=>'','error'=>true,'sendmail'=>false,'redirect'=>false];
-			
+
 			$email = $request->input('email') ? $request->input('email') : false;
 			$out['redirect'] = $request->input('_redirect') ? $request->input('_redirect') : false;
 			$password = $request->input('password') ? $request->input('password') : false;
-			
+
 			if($email){
-				
+
 				$user = User::where('email','LIKE',$email)->select('id', 'email', 'username', 'role_id', 'firstname', 'name', 'confirmed', 'password')->first();
 				if($user){
-					
+
 					$uname = $user->firstname ? $user->firstname : ($user->name ? $user->name : $user->username);
-					
+
 					if($password) {
-						
+
 						if(!$auth->validate(['email'=>$email, 'password'=>$password])) {
 
 							$out['msg'] = 'Пароль неверный. Попробуйте войти через Email.';
 							$out['redirect'] = false;
 						}
 						else {
-							
+
 							if($user->id) {
 
 								$auth->login($user, true);
@@ -225,19 +226,19 @@ class AuthController extends Controller
 
 								$role = Role::where('id', $user->role_id)->select('slug')->first();
 								$request->session()->put('statut', $role->slug);
-								
+
 								if(!$user->confirmed) $user->confirmed = 1;
 								$user->confirmation_code = null;
 								$user->save();
-								
+
 								$out['error'] = false;
 							}
-							
+
 						}
-						
+
 					}
 					else {
-						
+
 						$user->confirmation_code = str_random(30);
 						$user->save();
 						$out['sendmail'] = Mail::send('emails.auth.template', ['title'=>'Быстрый вход','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.route('email.get',['email'=>$user->email, 'confirm'=>$user->confirmation_code]) . ($out['redirect'] ? '?_redirect='.$out['redirect'] : '').'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small>'], function ($m) use ($user) {
@@ -249,29 +250,29 @@ class AuthController extends Controller
 					}
 				}
 				else {
-					
+
 					$user = new User;
-					
+
 					$name = $request->input('name') ? $request->input('name') : false;
 					$phone = $request->input('phone') ? $request->input('phone') : false;
 					$username = $request->input('login') ? $request->input('login') : false;
-					
+
 					if(!$username) {
-						
+
 						$parse_email = explode('@', $email);
 						$username = array_shift( $parse_email );
-						
+
 						$check_username = $user->where('username','LIKE',$username)->first();
 						if($check_username) $username .= '_'. substr( md5(time()), 2, 4);
-						
+
 					}
-					
+
 					if(!$password) {
 						$password = substr( crypt( md5( time() . $username ) , time() ), 2, 6);
 						$out['error'] = false;
 					}
 					else {
-						
+
 						if(strlen($password) < 6) {
 							$out['msg'] = 'Пароль должен быть > 6 символов';
 						}
@@ -285,21 +286,21 @@ class AuthController extends Controller
 							$out['error'] = false;
 						}
 					}
-					
+
 					if(!$out['error']) {
-						
+
 						$user->email = $email;
 						$user->username = $username;
 						$user->password = bcrypt($password);
-						
+
 						if($name) $user->name = $name;
 						if($phone) $user->phone = $phone;
-						
+
 						$role = Role::where('slug', 'user')->select('id')->first();
 						$user->role_id = $role->id;
 						$user->confirmation_code = str_random(30);
 						$user->save();
-						
+
 						$out['sendmail'] = Mail::send('emails.auth.template', ['title'=>'Быстрая регистрация','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.url('auth/email/'.$user->email.'/'.$user->confirmation_code . ($out['redirect'] ? '?_redirect='.$out['redirect'] : '')).'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small><br><hr><br>В дальнейшем Вы можете использовать <a href="'.url('i').'">вход по паролю</a>.<br>Ваш пароль: <b>'.$password.'</b><br>'], function ($m) use ($user) {
 							$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 						});
@@ -308,57 +309,57 @@ class AuthController extends Controller
                         Mail::send('emails.auth.template', ['title'=> 'Зарегестрирован новый пользователь','text'=>'Пользователь , '.$user->username.' зарегестрирован на сайте. <small>Время регистрации '.date('H:i d.m.Y',time()+60*60).'</small>'], function ($message) {
                             $message->to('info@iteam.ru', 'Admin')->subject('Новый пользователь');
                         });
-						
+
 					}
-					
+
 				}
-				
+
 			}
 			else {
 				$out['msg'] = 'Укажите корректный Email';
 			}
-			
+
 			return response()->json( $out );
 //			return response()->with( 'status' , 'Вам на Email направлено письмо со ссылкой для авторизованного входа на сайт. В личном кабинете Вы можете установить новый пароль');
 		}
 		else return redirect()->route('home');
 	}
-	
-	
+
+
 
 	public function authEmail(Request $request, $email='', $confirm='')
 	{
 		$redirect = $request->input('_redirect') ? redirect($request->input('_redirect')) : false;
 		if(Auth()->user()) return $redirect ? $redirect->with('status','Добро пожаловать!') : redirect()->route('profile')->with('status','Добро пожаловать!');
-		
+
 		if(!$email && $request->input('email')) $email = $request->input('email');
 		elseif($email && !$request->input('email')) $request->email = $email;
 		if(!$confirm && $request->input('confirm')) $confirm = $request->input('confirm');
 		elseif($confirm && !$request->input('confirm')) $request->confirm = $confirm;
-		
+
 		if(!$redirect) $redirect = redirect()->route('email.get');//redirect()->back()
-		
+
 		if($email && $confirm) {
-			
+
 			$user = User::where('email','=',$email)->select('id','email','username','role_id','confirmed','confirmation_code','updated_at')->first();
 			if(!$user) {
-				
+
 				$user = new User;
-				
+
 				$name = $request->input('name') ? $request->input('name') : false;
 				$phone = $request->input('phone') ? $request->input('phone') : false;
 				$username = $request->input('login') ? $request->input('login') : false;
 				$password = $request->input('password') ? $request->input('password') : false;
-				
+
 				if(!$username) {
 					$parse_email = explode('@', $email);
 					$username = array_shift( $parse_email );
-					
+
 					$check_username = $user->where('username','LIKE',$username)->first();
 					if($check_username) $username .= '_'. substr( md5(time()), 2, 4);
-					
+
 				}
-				
+
 				if(!$password) {
 					$password = substr( crypt( md5( time() . $username ) , time() ), 2, 6);
 				}
@@ -366,22 +367,22 @@ class AuthController extends Controller
 				$user->email = $email;
 				$user->username = $username;
 				$user->password = bcrypt($password);
-				
+
 				if($name) $user->name = $name;
 				if($phone) $user->phone = $phone;
-				
+
 				$role = Role::where('slug', 'user')->select('id')->first();
 				$user->role_id = $role->id;
 				$user->confirmation_code = str_random(30);
 				$user->save();
-				
+
 				$send = Mail::send('emails.auth.template', ['title'=>'Быстрая регистрация','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.route('email.get',['email'=>$user->email, 'confirm'=>$user->confirmation_code]).'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small><br><hr><br>В дальнейшем Вы можете использовать <a href="'.url('i').'">вход по паролю</a>.<br>Ваш пароль: <b>'.$password.'</b><br>'], function ($m) use ($user) {
 					$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 				});
-				
+
 				return $redirect->with('status','Проверьте Ваш почтовый ящик: Вам отправлено письмо со ссылкой для входа');
 
-				
+
 			}
 			elseif($user->confirmation_code === $confirm) {
 				if((time()-strtotime($user->updated_at)) > 60*60) {
@@ -393,10 +394,10 @@ class AuthController extends Controller
 					return $redirect->with('error','Код подтверждения устарел. Проверьте Ваш почтовый ящик: Вам отправлено письмо с новой ссылкой для входа');
 				}
 				else {
-					
+
 					Auth()->login($user, true);
 					#MAIL Выполнен вход
-					
+
 					if($request->session()->has('user_id'))	{
 						$request->session()->forget('user_id');
 					}
@@ -404,46 +405,46 @@ class AuthController extends Controller
 
 					$role = Role::where('id', $user->role_id)->select('slug')->first();
 					$request->session()->put('statut', $role->slug);
-					
+
 					if(!$user->confirmed) $user->confirmed = 1;
 					$user->confirmation_code = null;
 					$user->save();
-					
+
 					return $redirect->with('status','Добро пожаловать, '.$user->username);
-					
+
 				}
 			}
 			else {
 				$user->confirmation_code = str_random(30);
 				$save = $user->save();
-				
+
 				$send = Mail::send('emails.auth.template', ['title'=>'Быстрый вход','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.route('email.get',['email'=>$user->email, 'confirm'=>$user->confirmation_code]).'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small>'], function ($m) use ($user) {
 							$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 						});
 				return $redirect->with('error','Код подтверждения не совпадает. Проверьте Ваш почтовый ящик: Вам отправлено письмо с новой ссылкой для входа');
 			}
-			
+
 		}
-		
+
 		return view('auth.byemail');
-		
+
 	}
-	
-	
+
+
 
 	public function authEmailPost(Request $request, $email='', $confirm='')
 	{
-		
+
 		$redirect = $request->input('_redirect') ? redirect($request->input('_redirect')) : false;
 		if(Auth()->user()) return $redirect ? $redirect->with('status','Добро пожаловать!') : redirect()->route('profile')->with('status','Добро пожаловать!');
-		
+
 		if(!$email && $request->input('email')) $email = $request->input('email');
 		elseif($email && !$request->input('email')) $request->email = $email;
 		if(!$confirm && $request->input('confirm')) $confirm = $request->input('confirm');
 		elseif($confirm && !$request->input('confirm')) $request->confirm = $confirm;
-		
+
 		if(!$redirect) $redirect = redirect()->route('email.get');//redirect()->back()
-			
+
 		$this->validate(	$request,
 							[	'email' => 'required|email',
 								'phone' => 'min:7',
@@ -463,26 +464,26 @@ class AuthController extends Controller
 							#$validator = Validator::make($request->all(), ['email' => 'required|email',]);
 							#if ($validator->fails()) {return redirect()->back()->withErrors($validator)->withInput();				}
 
-		
+
 		$user = User::where('email','=',$email)->select('id','email','username','role_id','confirmed','confirmation_code','updated_at')->first();
 		if(!$user) {
-			
+
 			$user = new User;
-			
+
 			$name = $request->input('name') ? $request->input('name') : false;
 			$phone = $request->input('phone') ? $request->input('phone') : false;
 			$username = $request->input('login') ? $request->input('login') : false;
 			$password = $request->input('password') ? $request->input('password') : false;
-			
+
 			if(!$username) {
 				$parse_email = explode('@', $email);
 				$username = array_shift( $parse_email );
-				
+
 				$check_username = $user->where('username','LIKE',$username)->first();
 				if($check_username) $username .= '_'. substr( md5(time()), 2, 4);
-				
+
 			}
-			
+
 			if(!$password) {
 				$password = substr( crypt( md5( time() . $username ) , time() ), 2, 6);
 			}
@@ -490,40 +491,40 @@ class AuthController extends Controller
 			$user->email = $email;
 			$user->username = $username;
 			$user->password = bcrypt($password);
-			
+
 			if($name) $user->name = $name;
 			if($phone) $user->phone = $phone;
-			
+
 			$role = Role::where('slug', 'user')->select('id')->first();
 			$user->role_id = $role->id;
 			$user->confirmation_code = str_random(30);
 			$user->save();
-			
+
 			$send = Mail::send('emails.auth.template', ['title'=>'Быстрая регистрация','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.route('email.get',['email'=>$user->email, 'confirm'=>$user->confirmation_code]).'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small><br><hr><br>В дальнейшем Вы можете использовать <a href="'.url('i').'">вход по паролю</a>.<br>Ваш пароль: <b>'.$password.'</b><br>'], function ($m) use ($user) {
 				$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 			});
-			
+
 			return $redirect->with('status','Проверьте Ваш почтовый ящик: Вам отправлено письмо со ссылкой для входа');
 
-			
+
 		}
 		elseif($user->confirmation_code === $confirm) {
-			
+
 			if((time()-strtotime($user->updated_at)) > 60*60) {
-				
+
 				$user->confirmation_code = str_random(30);
 				$user->save();
 				$send = Mail::send('emails.auth.template', ['title'=>'Быстрый вход','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.route('email.get',['email'=>$user->email, 'confirm'=>$user->confirmation_code]).'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small>'], function ($m) use ($user) {
 							$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 						});
 				return $redirect->with('error','Код подтверждения устарел. Проверьте Ваш почтовый ящик: Вам отправлено письмо с новой ссылкой для входа');
-			
+
 			}
 			else {
-				
+
 				$auth->login($user, true);
 				#MAIL Выполнен вход
-				
+
 				if($request->session()->has('user_id'))	{
 					$request->session()->forget('user_id');
 				}
@@ -531,50 +532,50 @@ class AuthController extends Controller
 
 				$role = Role::where('id', $user->role_id)->select('slug')->first();
 				$request->session()->put('statut', $role->slug);
-				
+
 				if(!$user->confirmed) $user->confirmed = 1;
 				$user->confirmation_code = null;
 				$user->save();
-				
+
 				return $redirect->with('status','Добро пожаловать, '.$user->username);
-				
+
 			}
 		}
 		else {
 			$user->confirmation_code = str_random(30);
 			$save = $user->save();
-			
+
 			$send = Mail::send('emails.auth.template', ['title'=>'Быстрый вход','text'=>'Здравствуйте, '.$user->username.'! Чтобы прямо сейчас войти на iTeam, кликните по ссылке ниже:<br><center><a class="btn" href="'.route('email.get',['email'=>$user->email, 'confirm'=>$user->confirmation_code]).'">Ссылка для входа</a></center><br><small>Ссылка действительна до '.date('H:i d.m.Y',time()+60*60).'</small>'], function ($m) use ($user) {
 						$m->to($user->email, $user->username)->subject('Ссылка для входа на iTeam');
 					});
-					
+
 			if($confirm) return $redirect->with('error','Код подтверждения не совпадает. Проверьте Ваш почтовый ящик: Вам отправлено письмо с новой ссылкой для входа');
 			return $redirect->with('status','Проверьте Ваш почтовый ящик: Вам отправлено письмо со ссылкой для входа');
 		}
 
 	}
-	
-	
+
+
 
 	public function getLogout()
 	{
 		Auth()->logout();
 		return redirect()->back()->with('status', 'До встречи');
 	}
-	
+
     public function getProfile(Request $request, Guard $auth)
     {
         if(($user = $auth->user()) && $user->id){
 			//$redirect = (@$request->input('redirect')) ? $request->input('redirect') : '';
 			//return redirect('/i' . $redirect);
-			
+
 			#return redirect('/i' . $user->username);
 			return '/i/#' . $user->username;
-			
+
 		}
 		else return $this->showLoginForm();
     }
-	
+
 	/**
 	 * Handle a login request to the application.
 	 *
@@ -586,9 +587,10 @@ class AuthController extends Controller
 		LoginRequest $request,
 		Guard $auth)
 	{
+
 //	    dd(\Session::get('key'));
 		$logValue = $request->input('log');
-		
+
 		$_redirect = $request->input('_redirect');
         $_redirect = \Session::get('_redirect');
 		$logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -603,37 +605,38 @@ class AuthController extends Controller
 				->withInput($request->only('log'));
         }
 
-		
+
 		$user_id = 0;
 		if($request->session()->has('olduser_email'))	{
-			
+
 			$user_m = new User;
 			//$check_user = $user_m->whereEmail($request->input('log'))->first();
 			$check_user = $user_m->whereEmail($request->session()->get('olduser_email'))->first();
-			
+
 			if($check_user && ( $check_user->old_password === md5(  md5($request->input('password') ) . $check_user->salt ) ) ) {
 				$user = $check_user;
 				$user_id = $user->id;
-				
+
 				$request->session()->forget('olduser_email');
-				
+
 				$user->password = bcrypt($request->input('password'));
 				$user->customer_type = 'UPD';
 				$user->visited_at = date('Y-m-d H:i:s');
 				#
 				$user->save();
 			}
-			
+
 		}
-		
+
 		if(!$user_id){
-			
+
 			$credentials = [
-				$logAccess  => $logValue, 
+				$logAccess  => $logValue,
 				'password'  => $request->input('password')
 			];
 
 			if(!$auth->validate($credentials)) {
+
 				if ($throttles) {
 					$this->incrementLoginAttempts($request);
 				}
@@ -642,19 +645,22 @@ class AuthController extends Controller
 					->with('error', trans('front/login.credentials'))
 					->withInput($request->only('log'));
 			}
-				
+
 			$user = $auth->getLastAttempted();
-			
+
 		}
 
 		//if($user->confirmed) {
+
 		if($user->id) {
 			if ($throttles) {
+
                 $this->clearLoginAttempts($request);
             }
 
+			// dd($auth->loginUsingId($user->id));
 			$auth->login($user, $request->has('memory'));
-			
+
 			#MAIL Выполнен вход
 
 			if($request->session()->has('user_id'))	{
@@ -663,13 +669,13 @@ class AuthController extends Controller
 
 			return redirect($_redirect ? $_redirect : '/i');
 		}
-		
+
 		$request->session()->put('user_id', $user->id);
 
 		return redirect($_redirect ? $_redirect : '/auth/login')->with('error', trans('front/verify.again'));
 	}
 
-	
+
 	/**
 	 * Handle a login request to the application.
 	 *
@@ -680,12 +686,12 @@ class AuthController extends Controller
 	public function postLoginAjax(LoginRequest $request, Guard $auth)
 	{
 					/*
-					
+
 					if($request->ajax()) {
 						return response()->json([
-							'view' => view('back.posts.table', compact('posts'))->render(), 
+							'view' => view('back.posts.table', compact('posts'))->render(),
 							'links' => e($links)
-						]);		
+						]);
 					}
 
 					$post = $this->post->find($id);
@@ -693,12 +699,12 @@ class AuthController extends Controller
 					$this->post->updateActive($request->all(), $id);
 					return response()->json();
 					*/
-		
+
 		if($request->ajax()){
-		
+
 			if($auth->user()) return response()->json('уже залогинен');
 			#return response()->json($request->input('log'));
-			
+
 			$logValue = $request->input('log');
 			$logAccess = filter_var($logValue, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
@@ -711,7 +717,7 @@ class AuthController extends Controller
 			}
 
 			$credentials = [
-				$logAccess  => $logValue, 
+				$logAccess  => $logValue,
 				'password'  => $request->input('password')
 			];
 
@@ -722,7 +728,7 @@ class AuthController extends Controller
 
 				return response()->json(['error2', trans('front/login.credentials')]);
 			}
-				
+
 			$user = $auth->getLastAttempted();
 
 			if($user->confirmed) {
@@ -738,11 +744,11 @@ class AuthController extends Controller
 
 				return response()->json('ok');
 			}
-			
-			$request->session()->put('user_id', $user->id);	
+
+			$request->session()->put('user_id', $user->id);
 
 			return response()->json(['error3', trans('front/verify.again')]);
-		
+
 		}
 		else abort(404);
 
@@ -761,24 +767,24 @@ class AuthController extends Controller
 		User $user_m,
 		Guard $auth)
 	{
-		
+
 		$_redirect = $request->input('_redirect');
 		$_redirect = \Session::get('_redirect');
 		$fields = $request->all();
 		if(!$fields['username']) {
 			$parse_email = explode('@', $fields['email']);
 			$fields['username'] = array_shift( $parse_email );
-			
+
 			$check_username = $user_m->where('username','LIKE',$fields['username'])->first();
 			if($check_username) $fields['username'] .= '_'. substr( md5(time()), 2, 4);
-			
+
 		}
 		if(!$fields['password']) {
 			$fields['password'] = substr( crypt( md5( time() . $fields['username'] ) , time() ), 2, 6);
 		}
-		
+
 		$user = $user_m;
-		
+
 		$user->password = bcrypt($fields['password']);
 		$user->confirmed = true;
 			//$user->confirmation_code = str_random(30);
@@ -787,35 +793,35 @@ class AuthController extends Controller
 		$user->firstname = trim($fields['firstname']);
 		$user->username = trim($fields['username']);
 		#$user->subscribed = $fields['subscribed'];
-		
+
 		$role = new Role();
 		$role_user = $role->where('slug', 'user')->first();
 		$user->role_id = $role_user->id;
-		
+
 		$user->save();
-		
+
 		$send = Mail::send('emails.auth.welcome', ['title' => 'Добро пожаловать, ' . $user->username, 'log' => $user->username, 'email' => $user->email, 'password' => $fields['password'], 'unsubscribe' => @$fields['subscribed'], 'confirmation_code' => $user->confirmation_code], function ($m) use ($user) {
 			$m->to($user->email, $user->username)->subject('Спасибо за регистрацию, ' . $user->username);
 		});
-		
+
 		$auth->login($user);
-		
+
 		if($request->session()->has('user_id'))	{
 			$request->session()->forget('user_id');
 		}
-		$request->session()->put('user_id', $user->id);	
-		
+		$request->session()->put('user_id', $user->id);
+
 		/*
 		if($send->getReasonPhrase()==="OK") {
 			return redirect()->back()->with('status', trans('front/verify.message'));
 		}
 		else {
-			
+
 		}
 		*/
-		
+
 		#$this->dispatch(new SendMail($user));
-		
+
 			/*
 			$Mailchimp = new Mailchimp();
 			$Mailchimp->subscribe($user->email, $user->firstname, '');
@@ -837,7 +843,7 @@ class AuthController extends Controller
 		User $user_m,
 		UserRepository $user_gestion)
 	{
-		
+
 		$fields = $request->all();
 		if(!$fields['username']) {
 			$parse_email = explode('@', $fields['email']);
@@ -847,15 +853,15 @@ class AuthController extends Controller
 			$fields['password'] = substr( crypt( md5( time() . $fields['username'] ) , time() ), 2, 6);
 		}
 		//dd($fields);
-		
+
 		/*
 		$user = $user_gestion->store(
-			$fields, 
+			$fields,
 			$confirmation_code = str_random(30)
 		);
 		*/
 		$user = $user_m;
-		
+
 		$user->password = bcrypt($fields['password']);
 		//$user->confirmed = true;
 		$user->confirmation_code = str_random(30);
@@ -864,12 +870,12 @@ class AuthController extends Controller
 		$user->firstname = trim($fields['firstname']);
 		$user->username = trim($fields['username']);
 		//$user->subscribed = $fields['subscribed'];
-		
+
 		$role = new Role();
 		$role_user = $role->where('slug', 'user')->first();
 		$user->role_id = $role_user->id;
-		
-		$user->save();		
+
+		$user->save();
 
 		$this->dispatch(new SendMail($user));
 
@@ -881,16 +887,16 @@ class AuthController extends Controller
 	 *
 	 * @return Response
 	 */
-	
+
 	public function postConfirm(ConfirmRequest $request, User $user_m)
 	{
 		$user = $user_m->whereEmail($request->email)->firstOrFail();
 		$user->confirmation_code = str_random(30);
 		$user->save();
 		$this->dispatch(new SendMail($user));
-		
+
 		return redirect('/auth/login')->with('status', trans('front/verify.resend'));
-		
+
 	}
 
 	/**
@@ -903,14 +909,14 @@ class AuthController extends Controller
 	public function getConfirm(User $user_m, Guard $auth, $confirmation_code = '')
 	{
 		if($confirmation_code) {
-			
+
 			$user = $user_m->whereConfirmationCode($confirmation_code)->first();
 			if($user){
-				
+
 				$user->confirmed = true;
 				$user->confirmation_code = null;
 				$user->save();
-				
+
 				$auth->login($user, 1);
 				if($auth->user()) return redirect()->route('profile')->with('status', trans('front/verify.success'));
 				return redirect('/auth/login')->with('status', trans('front/verify.success'));
@@ -918,10 +924,10 @@ class AuthController extends Controller
 			else {
 				return redirect('/auth/confirm')->with('error', trans('front/verify.some-error'));
 			}
-			
+
 		}
 		else {
-			
+
 			/*
 			if($user = Auth()->user()) {
 				return view('auth.confirm');
@@ -930,7 +936,7 @@ class AuthController extends Controller
 			*/
 			//return 'This is confirm page';
 			return view('auth.confirm');
-		
+
 		}
 	}
 
@@ -945,9 +951,9 @@ class AuthController extends Controller
 		UserRepository $user_gestion,
 		Request $request)
 	{
-		
+
 		$redirect = $request->input('_redirect') ? redirect($request->input('_redirect')) : redirect()->route('home');
-		
+
 		if($request->session()->has('user_id'))	{
 			$user = $user_gestion->getById($request->session()->get('user_id'));
 
@@ -956,9 +962,9 @@ class AuthController extends Controller
 			return $redirect->with('status', trans('front/verify.resend'));
 		}
 
-		return $redirect;        
+		return $redirect;
 	}
-	
+
 	/**
 	 * Handle a resend request.
 	 *
@@ -971,9 +977,9 @@ class AuthController extends Controller
 		User $user_m,
 		Request $request)
 	{
-		    
+
 	}
-	
+
     /**
      * Redirect the user to the GitHub authentication page.
      *
@@ -995,7 +1001,7 @@ class AuthController extends Controller
 		//dd($user);
         // $user->token;
     }
-	
+
     /**
      * Переустановка пароля старого юзера
      *
@@ -1004,8 +1010,8 @@ class AuthController extends Controller
     public function resetOldPassword()
     {
 		if(!session('toresetpsswrd')) return "error toresetpsswrd";
-		
+
 		return "Переустановка пароля старого юзера";
-    }	
-	
+    }
+
 }
