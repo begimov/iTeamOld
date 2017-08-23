@@ -283,6 +283,7 @@
 					  <input type="hidden" name="WMI_CURRENCY_ID" value="643"/>
 					  <input type="hidden" name="WMI_PAYMENT_NO" value="{{$order->id}}"/>
 					  <input type="hidden" name="WMI_DESCRIPTION" value="iTeam"/>
+					  <input type="hidden" name="WMI_AUTO_LOCATION" value="1"/>
 					  <input type="hidden" name="WMI_SUCCESS_URL" value="{{'https://iteam.ru/i/order/'.$order->id}}?from=walletone"/>
 					  <input type="hidden" name="WMI_FAIL_URL" value="{{'https://iteam.ru/i/order/'.$order->id}}?from=walletone"/>
 					  <input type="hidden" name="WMI_SIGNATURE" value="{{ generateWalletOneSignature([
@@ -291,6 +292,7 @@
 									"WMI_CURRENCY_ID" => "643",
 									"WMI_PAYMENT_NO" => "$order->id",
 									"WMI_DESCRIPTION" => "iTeam",
+									"WMI_AUTO_LOCATION" => "1",
 									"WMI_SUCCESS_URL" => "https://iteam.ru/i/order/$order->id?from=walletone",
 									"WMI_FAIL_URL" => "https://iteam.ru/i/order/$order->id?from=walletone",
 							]) }}"/>
