@@ -279,7 +279,7 @@
 					</div>
 					<form accept-charset="UTF-8" method="POST" class="ajax-update-order-yandex" action="https://wl.walletone.com/checkout/checkout/Index">
 						<input type="hidden" name="WMI_MERCHANT_ID" value="132360589069"/>
-					  <input type="hidden" name="WMI_PAYMENT_AMOUNT" value="{{$order->sum}}"/>
+					  <input type="hidden" name="WMI_PAYMENT_AMOUNT" value="{{$order->fact_sum ? $order->fact_sum : $order->sum}}"/>
 					  <input type="hidden" name="WMI_CURRENCY_ID" value="643"/>
 					  <input type="hidden" name="WMI_PAYMENT_NO" value="{{$order->id}}"/>
 					  <input type="hidden" name="WMI_DESCRIPTION" value="iTeam"/>
@@ -288,7 +288,7 @@
 					  <input type="hidden" name="WMI_FAIL_URL" value="{{'https://iteam.ru/i/order/'.$order->id}}?from=walletone"/>
 					  <input type="hidden" name="WMI_SIGNATURE" value="{{ generateWalletOneSignature([
 									"WMI_MERCHANT_ID" => "132360589069",
-									"WMI_PAYMENT_AMOUNT" => "$order->sum",
+									"WMI_PAYMENT_AMOUNT" => $order->fact_sum ? "$order->fact_sum" : "$order->sum",
 									"WMI_CURRENCY_ID" => "643",
 									"WMI_PAYMENT_NO" => "$order->id",
 									"WMI_DESCRIPTION" => "iTeam",
