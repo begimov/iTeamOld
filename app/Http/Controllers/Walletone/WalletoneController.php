@@ -14,7 +14,7 @@ class WalletoneController extends Controller
         if(!$this->allParametersExist($request)) {
             $this->printResponse("Retry", "Отсутствует обязательный параметр");
         }
-        
+
         if ($this->isSignatureCorrect($request)) {
             if (strtoupper($request->WMI_ORDER_STATE) == 'ACCEPTED') {
                 $this->updatePayedOrder($request);

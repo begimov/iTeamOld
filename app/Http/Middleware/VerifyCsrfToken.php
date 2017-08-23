@@ -7,6 +7,7 @@ class VerifyCsrfToken extends BaseVerifier {
 
     protected $except = [
         'send-question/',
+        'walletone',
     ];
 	/**
 	 * Handle an incoming request.
