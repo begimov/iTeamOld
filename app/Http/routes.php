@@ -5,6 +5,7 @@ URL::forceSchema('https');
 Route::get('pay/ya_demo/{id}', 'Site\O@testYaKassa');
 Route::post('pay/ya_demo/{id}', 'Site\O@testYaKassa');
 
+
 Route::get('search', function (\Illuminate\Http\Request $request) {
     require "sphinxapi.php";
 
@@ -85,270 +86,270 @@ Route::post('pay/{id}', 'Admin\OrderController@postCheck');
 Route::get('demon/order', 'Cron\OrderController@index');
 Route::get('demon/order/rassrochka', 'Cron\OrderController@rassrochka');
 
-Route::get('company/action{path?}', function() {
+Route::get('company/action{path?}', function () {
     return redirect('/company/about');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
-Route::get('company/learn{path?}', function() {
+Route::get('company/learn{path?}', function () {
     return redirect('/learn/webinar');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
-Route::get('action{path?}', function() {
+Route::get('action{path?}', function () {
     return redirect('/learn/webinar');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
 
-Route::get('competence{path?}', function() {
+Route::get('competence{path?}', function () {
     return redirect('/learn/webinar');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
-Route::get('publications/article_463', function() {
+Route::get('publications/article_463', function () {
     return redirect('/publications');
 });
 
-Route::get('publications/human/section_45/article_1115', function() {
+Route::get('publications/human/section_45/article_1115', function () {
     return redirect('/publications/human/section_45');
 });
 
-Route::get('publications/finances/section_30/article_2941', function() {
+Route::get('publications/finances/section_30/article_2941', function () {
     return redirect('/publications/finances/section_30');
 });
 
 
-Route::get('publications/finances/section_29/article_15', function() {
+Route::get('publications/finances/section_29/article_15', function () {
     return redirect('/publications/finances/section_29');
 });
 
-Route::get('publications/finances/section_30/article_2962', function() {
+Route::get('publications/finances/section_30/article_2962', function () {
     return redirect('/publications/finances/section_30');
 });
 
-Route::get('publications/finances/section_11/article_513', function() {
+Route::get('publications/finances/section_11/article_513', function () {
     return redirect('/publications/finances/section_11');
 });
 
-Route::get('publications/finances/section_12/page_1/count', function() {
+Route::get('publications/finances/section_12/page_1/count', function () {
     return redirect('/publications/finances/section_12');
 });
-Route::get('learn/11-effektivnyh-fishek-dlja-organizatsii-komandnoj-raboty-v-v', function() {
+Route::get('learn/11-effektivnyh-fishek-dlja-organizatsii-komandnoj-raboty-v-v', function () {
     return redirect('learn/organizatsionnaja-struktura/11-effektivnyh-fishek-dlja-organizatsii-komandnoj-raboty-v-v');
 });
 
-Route::get('publications/finances/section_14{path?}', function() {
+Route::get('publications/finances/section_14{path?}', function () {
     return redirect('/publications/finances');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
-Route::get('company/philanthropy_news{path?}', function() {
+Route::get('company/philanthropy_news{path?}', function () {
     return redirect('/company');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
-Route::get('company/action/seminar/motivation/webinar.htm{path?}', function() {
+Route::get('company/action/seminar/motivation/webinar.htm{path?}', function () {
     return redirect('/company');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
-Route::get('service{path?}', function() {
+Route::get('service{path?}', function () {
     return redirect('/company/service');
 })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
 
-Route::get('61211', function() {
+Route::get('61211', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('70625', function() {
+Route::get('70625', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('str/main_edit.php', function() {
+Route::get('str/main_edit.php', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('learn/breakfast/spiralnaja-dinamika-instrument-strategii', function() {
+Route::get('learn/breakfast/spiralnaja-dinamika-instrument-strategii', function () {
     return redirect('/learn/breakfast');
 });
 
-Route::get('learn/breakfast/findir-duties', function() {
+Route::get('learn/breakfast/findir-duties', function () {
     return redirect('/learn/webinar/findir-duties');
 });
 
-Route::get('learn/breakfast/razrabotka-strategii-shag-za-shagom', function() {
+Route::get('learn/breakfast/razrabotka-strategii-shag-za-shagom', function () {
     return redirect('/learn/webinar/razrabotka-strategii-shag-za-shagom');
 });
 
-Route::get('learn/breakfast/organizations-culture', function() {
+Route::get('learn/breakfast/organizations-culture', function () {
     return redirect('/learn/webinar/organizations-culture');
 });
 
-Route::get('learn/breakfast/indirect-cost-allocation', function() {
+Route::get('learn/breakfast/indirect-cost-allocation', function () {
     return redirect('/learn/webinar/indirect-cost-allocation');
 });
 
-Route::get('learn/breakfast/calculate-cost-products', function() {
+Route::get('learn/breakfast/calculate-cost-products', function () {
     return redirect('/learn/webinar/calculate-cost-products');
 });
 
-Route::get('learn/breakfast/what-is-roi', function() {
+Route::get('learn/breakfast/what-is-roi', function () {
     return redirect('/learn/webinar/what-is-roi');
 });
 
-Route::get('learn/breakfast/kpi_experience', function() {
+Route::get('learn/breakfast/kpi_experience', function () {
     return redirect('/learn/webinar/kpi_experience');
 });
 
-Route::get('learn/breakfast/offset-investment', function() {
+Route::get('learn/breakfast/offset-investment', function () {
     return redirect('/learn/webinar/offset-investment');
 });
 
-Route::get('learn/breakfast/manage-risks', function() {
+Route::get('learn/breakfast/manage-risks', function () {
     return redirect('/learn/webinar/manage-risks');
 });
 
-Route::get('learn/breakfast/maturity-of-processes', function() {
+Route::get('learn/breakfast/maturity-of-processes', function () {
     return redirect('/learn/webinar/maturity-of-processes');
 });
 
-Route::get('learn/webinar/corporate_culture', function() {
+Route::get('learn/webinar/corporate_culture', function () {
     return redirect('/learn/breakfast/corporate_culture');
 });
 
-Route::get('company/publication', function() {
+Route::get('company/publication', function () {
     return redirect('/company');
 });
 
-Route::get('company/action/webinar/strategy.php', function() {
+Route::get('company/action/webinar/strategy.php', function () {
     return redirect('/company');
 });
 
-Route::get('company/action/seminar/motivation/index.htm', function() {
+Route::get('company/action/seminar/motivation/index.htm', function () {
     return redirect('/company');
 });
 
-Route::get('company/action/seminar/finance.htm', function() {
+Route::get('company/action/seminar/finance.htm', function () {
     return redirect('/company');
 });
 
-Route::get('news/50421', function() {
+Route::get('news/50421', function () {
     return redirect('/news');
 });
 
 
-Route::get('60703', function() {
+Route::get('60703', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('company/action/seminar/effective_planning/webinar.htm', function() {
+Route::get('company/action/seminar/effective_planning/webinar.htm', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('61115', function() {
+Route::get('61115', function () {
     return redirect('/learn/webinar');
 });
 
 
-Route::get('action/seminar/effective_planning/kochnev.htm', function() {
+Route::get('action/seminar/effective_planning/kochnev.htm', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('60518', function() {
+Route::get('60518', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('60518', function() {
+Route::get('60518', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('businesstraining/distance_learning', function() {
+Route::get('businesstraining/distance_learning', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('60518', function() {
+Route::get('60518', function () {
     return redirect('/learn/webinar');
 });
 
-Route::get('projects', function() {
+Route::get('projects', function () {
     return redirect('/company/projects');
 });
 
-Route::get('news/60518', function() {
+Route::get('news/60518', function () {
     return redirect('/news');
 });
 
-Route::get('news/60221', function() {
+Route::get('news/60221', function () {
     return redirect('/news');
 });
 
-Route::get('publications/processes/process_automation/avtomatizirovat_upravlenie_biznes_protsessami', function() {
+Route::get('publications/processes/process_automation/avtomatizirovat_upravlenie_biznes_protsessami', function () {
     return redirect('/publications/processes/avtomatizirovat_upravlenie_biznes_protsessami');
 });
 
 
-Route::get('publications/corporation/section_97/article_2758', function() {
+Route::get('publications/corporation/section_97/article_2758', function () {
     return redirect('/publications/strategy/section_17/article_3642');
 });
 
 
-Route::get('index.htm', function() {
+Route::get('index.htm', function () {
     return redirect('/index.php');
 });
 
-Route::get('publications/marketing/section_26/article_3518', function() {
+Route::get('publications/marketing/section_26/article_3518', function () {
     return redirect('/publications/marketing/section_26');
 });
 
-Route::get('publications/target/opyt-primenenija-kpi-prichiny-uspehov-i-nesbyvshihsja-ozhida', function() {
+Route::get('publications/target/opyt-primenenija-kpi-prichiny-uspehov-i-nesbyvshihsja-ozhida', function () {
     return redirect('/publications/target/opyt-primenenija-kpi');
 });
 
-Route::get('publications/it/section_55/article_1810', function() {
+Route::get('publications/it/section_55/article_1810', function () {
     return redirect('/publications/it');
 });
 
-Route::get('publications/finances/section_29/article_1728', function() {
+Route::get('publications/finances/section_29/article_1728', function () {
     return redirect('/publications/finances/section_29');
 });
 
-Route::get('news/81206', function() {
+Route::get('news/81206', function () {
     return redirect('/news');
 });
 
-Route::get('news/81206', function() {
+Route::get('news/81206', function () {
     return redirect('/news');
 });
 
-Route::get('news/80712', function() {
+Route::get('news/80712', function () {
     return redirect('/news');
 });
 
-Route::get('businesstraining/justintime', function() {
+Route::get('businesstraining/justintime', function () {
     return redirect('/learn/webinar');
 });
 
 
-Route::get('news/30312', function() {
+Route::get('news/30312', function () {
     return redirect('/news');
 });
 
 
-Route::get('news/120606', function() {
+Route::get('news/120606', function () {
     return redirect('/news');
 });
 
-Route::get('news/60116', function() {
+Route::get('news/60116', function () {
     return redirect('/news');
 });
 
-Route::get('company/seminar', function() {
+Route::get('company/seminar', function () {
     return redirect('/company/about');
 });
 
-Route::get('team', function() {
+Route::get('team', function () {
     return redirect('/company/about');
 });
 
-Route::get('forum-slovo.ru/index.php-topic=40366.msg2214046', function() {
+Route::get('forum-slovo.ru/index.php-topic=40366.msg2214046', function () {
     return redirect('/company/about');
 });
 
-Route::get('learn/webinar/change_man/11', function() {
+Route::get('learn/webinar/change_man/11', function () {
     return redirect('/learn/webinar/change_man');
 });
 
@@ -356,28 +357,45 @@ Route::get('learn/webinar/change_man/11', function() {
 //    return redirect('/learn/course/kak-postroit-sistemu-upravlenija-protsessami-za-4-mesjatsa');
 //});
 
-Route::get('learn/course/management_processes', function() {
+Route::get('learn/course/management_processes', function () {
     return redirect('/learn/course');
 });
 
 
-Route::get('company/corp_seminar', function() {
+Route::get('company/corp_seminar', function () {
     return redirect('/company/about');
 });
 
-Route::get('company/actual', function() {
+Route::get('company/actual', function () {
     return redirect('/company/about');
 });
 
-Route::get('company/business-club', function() {
+Route::get('company/business-club', function () {
     return redirect('/company/about');
 });
+
+
+Route::group(['prefix' => 'SendMail'], function () {
+    Route::get('/index', function () {
+        return view('iteam.expertnaja-daignostika-sistemi-finansovogo-urpavlenija.index');
+    });
+    Route::get('/forma', function () {
+        return view('iteam.expertnaja-daignostika-sistemi-finansovogo-urpavlenija.forma');
+    });
+});
+
+Route::post('sendemail', ['as' => 'emailTest.EmailSend.sendMail', 'uses' => 'EmailTest\EmailSendController@sendMail']);
 
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::group(['domain' => 'iteam.ru'], function()
-    {
+    Route::group(['domain' => 'iteam.ru'], function () {
+
+        Route::group(['prefix' => 'walletone'], function () {
+            Route::post('/', ['as' => 'walletone.incoming.transaction', 'uses' => 'Walletone\WalletoneController@proccessIncomingTransaction']);
+        });
+
+
         Route::get('companies', ['as' => 'companies.index', 'uses' => 'CompaniesController@index']);
 
         Route::post('send-question', ['as' => 'site.learn.send-question', 'uses' => 'Learn\LearnController@sendQuestion']);
@@ -397,6 +415,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('corporation-send/{id}', ['as' => 'site.test.corporation.result', 'uses' => 'TestController@saveResultCorporationTest']);
         });
 
+
         // DisposableTest
         Route::group(['prefix' => 'master-test', 'middleware' => ['auth']], function () {
             Route::get('view/{name}', ['as' => 'master-test.index', 'uses' => 'DisposableTestController@index']);
@@ -406,15 +425,14 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         // Company
-        Route::group(['prefix' => 'company'], function()
-        {
+        Route::group(['prefix' => 'company'], function () {
             //Route::get('/', 'CopageController@indexHome')->name('company.home');
             Route::get('response', 'ResponseController@index')->name('response.index');
             Route::get('response/{id}', 'ResponseController@show')->name('response.show');
             Route::get('projects', 'ProjectController@index');
 
             // TEMP
-            Route::get('i', function(){
+            Route::get('i', function () {
                 return redirect('/i');
             });
 
@@ -422,9 +440,8 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         //
-        Route::group(['prefix' => 'spec'], function()
-        {
-            Route::get('/', function(){
+        Route::group(['prefix' => 'spec'], function () {
+            Route::get('/', function () {
                 return redirect('/');
             });
 
@@ -435,28 +452,25 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         // Редиректы
-        Route::get('learn/webinar/corporate_culture/thanks', function() {
+        Route::get('learn/webinar/corporate_culture/thanks', function () {
             return redirect('/promo/corporate_culture/thanks');
         });
-        Route::get('courses', function() {
+        Route::get('courses', function () {
             return redirect('https://iteam.ru/learn/course/');
         });
-        Route::get('courses/{path?}', function($path) {
-            return redirect('https://iteam.ru/learn/course/'.$path);
+        Route::get('courses/{path?}', function ($path) {
+            return redirect('https://iteam.ru/learn/course/' . $path);
         })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
-
 
 
         // Курсы / Вебинары
         Route::get('learn/{path?}', 'Learn\LearnController@index')->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+')->name('learn');
 
 
-        Route::group(['prefix' => 'v2', 'middleware' => ['admin']], function()
-        {
+        Route::group(['prefix' => 'v2', 'middleware' => ['admin']], function () {
 
             // Company
-            Route::group(['prefix' => 'company'], function()
-            {
+            Route::group(['prefix' => 'company'], function () {
                 Route::get('response', 'Site\ResponseController@index')->name('response.index');
                 Route::get('response/{id}', 'Site\ResponseController@show')->name('response.show');
 
@@ -491,8 +505,7 @@ Route::group(['middleware' => ['web']], function () {
 
         });
 
-        Route::group(['prefix' => 'i', 'middleware' => ['auth']], function()
-        {
+        Route::group(['prefix' => 'i', 'middleware' => ['auth']], function () {
 
             Route::get('/', 'ProfileController@index')->name('profile');
             Route::post('/', 'ProfileController@postProfile')->name('profile.post');
@@ -527,8 +540,7 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'Auth\AuthController@postAuthAjax'
         ]);
 
-        Route::group(['prefix' => 'ajax', 'middleware' => ['ajax','auth']], function()
-        {
+        Route::group(['prefix' => 'ajax', 'middleware' => ['ajax', 'auth']], function () {
             Route::resource('order', 'Ajax\OrderController', ['names' => [
                 'index' => 'ajax.orders.index',
                 'store' => 'ajax.orders.store',
@@ -571,8 +583,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('password/reset', 'Auth\PasswordController@postReset')->name('reset.post');
 
         // Admin
-        Route::group(['prefix' => '~', 'middleware' => ['redac']], function()
-        {
+        Route::group(['prefix' => '~', 'middleware' => ['redac']], function () {
 
             Route::get('/', [
                 'uses' => 'Admin\AdminController@index',
@@ -589,8 +600,7 @@ Route::group(['middleware' => ['web']], function () {
                 'update' => 'admin.company.update',
             ]]);
 
-            Route::group(['middleware' => 'admin'], function()
-            {
+            Route::group(['middleware' => 'admin'], function () {
                 Route::group(['prefix' => 'mark', 'namespace' => 'Admin'], function () {
                     Route::get('index', ['as' => 'admin.mark.index', 'uses' => 'MarkController@index']);
                     Route::post('store', ['as' => 'admin.mark.store', 'uses' => 'MarkController@store']);
@@ -628,7 +638,7 @@ Route::group(['middleware' => ['web']], function () {
                     Route::get('destroy/{id}', ['as' => 'admin.category-learn.destroy', 'uses' => 'CategoryController@destroy']);
                 });
 
-                Route::group(['prefix' => 'xmlhttp'], function() {
+                Route::group(['prefix' => 'xmlhttp'], function () {
                     Route::post('urlupload', 'UploadController@ajaxUploadFromUrl')->name('urlupload');
                 });
                 //Route::group(['prefix' => 'ajax', 'middleware' => 'ajax'], function() {
@@ -724,8 +734,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('response/{id}/update', ['as' => 'admin.response.update', 'uses' => 'Admin\ResponseController@update']);
 
 
-
-
             Route::resource('project', 'Admin\ProjectController', ['names' => [
                 'index' => 'admin.project.index',
                 'store' => 'admin.project.store',
@@ -756,12 +764,11 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     // редирект с co.iteam
-    Route::group(['domain' => 'co.iteam.ru'], function()
-    {
-        Route::get('/{path?}', function($path)
-        {
-            return redirect('https://iteam.ru/'.$path);
+    Route::group(['domain' => 'co.iteam.ru'], function () {
+        Route::get('/{path?}', function ($path) {
+            return redirect('https://iteam.ru/' . $path);
         })->where('path', '[абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯa-zA-Z0-9/_-]+');
     });
+
 
 });

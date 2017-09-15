@@ -220,18 +220,19 @@
 
 
     <div class="container">
-        {{--<div id="fb-root">&nbsp;</div>--}}
-        {{--<script>(function (d, s, id) {--}}
-                {{--var js, fjs = d.getElementsByTagName(s)[0];--}}
-                {{--if (d.getElementById(id)) return;--}}
-                {{--js = d.createElement(s);--}}
-                {{--js.id = id;--}}
-                {{--js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.8&appId=1254406184618438";--}}
-                {{--fjs.parentNode.insertBefore(js, fjs);--}}
-            {{--}(document, 'script', 'facebook-jssdk'));</script>--}}
-        <div class="fb-comments"
-             data-href="<?php echo 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>" data-width="700"
-             data-numposts="10"></div>
+        <div id="fb-root">&nbsp;</div>
+        <div id="fb-root"></div>
+        <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.10&appId=2029522097269210";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+
     </div>
 
 </main>
@@ -289,6 +290,13 @@
                     @else
                         <li><a class="before-glyphicon glyphicon-user" href="/i/auth">Вход</a></li>
                         <li><a class="before-glyphicon glyphicon-lock" href="/auth/register">Регистрация</a></li>
+                        {{--<div class="fb-login-button" data-max-rows="1" data-size="small"--}}
+                             {{--data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true"--}}
+                             {{--data-use-continue-as="false"></div>--}}
+                        {{--<div>--}}
+                            {{--<input type="button" value="goFacebook" onclick="fb_login()">--}}
+                            {{--<input type="button" value="backFacebook" onclick="outFacebook()">--}}
+                        {{--</div>--}}
                     @endif
                 </ul>
             </div>
@@ -311,6 +319,52 @@
 
 <!-- Custom Theme JavaScript -->
 <script>
+
+
+    // регистрация ФБ
+    function handle_fb_data(response){
+        FB.api('/me?fields=id,name,email', function(response) {
+            console.log('Successful login for: ' + response.name);
+            console.log('нам нужно мыло: ' + response.email);
+            console.log('Прилитело из ФБ: '+JSON.stringify(response));
+        });
+    }
+
+    function fb_login(){
+        FB.getLoginStatus(function(response) {
+            if (response.authResponse) {
+                console.log('Welcome!  Fetching your information.... ');
+                handle_fb_data(response);
+            } else {
+                console.log('Юзер был не залогинен в самом ФБ, запускаем окно логинизирования');
+                FB.login(function(response){
+                    if (response.authResponse) {
+                        console.log('Welcome!  Fetching your information.... ');
+                        handle_fb_data(response);
+                    } else {
+                        console.log('Походу пользователь передумал логиниться через ФБ');
+                    }
+                });
+            }
+        });
+    }
+
+    function fbsecond() {
+        FB.login(function(response) {
+            // handle the response
+        }, {scope: 'public_profile,email'});
+    }
+
+    function outFacebook() {
+        FB.logout(function(response) {
+            // Person is now logged out
+        });
+    }
+
+
+
+
+
 
     $('a[data-toggle="modal"]').click(function () {
         window.location.hash = $(this).attr('href');
@@ -348,6 +402,7 @@
 
 
     var modalInit = false;
+
     function ModalWinInit() {
         modalWin = '<div id="modalw" class="modalwrap" style="z-index:99999999;display:none;position:fixed;top:0;left:0;padding:0;margin:0;width:100%;height:100%;background-color:rgba(32,32,32,0.7);overflow:hidden;">';
         modalWin += '	<i class="close" style="position:absolute;right:32px;top:0;color:white;font:32px/1 monospace;cursor:pointer;">&#10005;</i>';
@@ -364,7 +419,9 @@
         });
         return modalInit;
     }
+
     modalInit = ModalWinInit();
+
     function ModalBoxHtml(modalBoxContent) {
         if (!modalInit) modalInit = ModalWinInit();
         var modalWin = $("#modalw");
@@ -375,6 +432,7 @@
             modalWin.show();
         }
     }
+
     function FileBoxHtml(file, opt) {
         var mimes = {"mp4": "mp4", "ogg": "ogg", "webm": "webm", "flv": "flv"};
         var exts = {"mp4": "mp4", "ogv": "ogg", "webm": "webm", "flv": "flv"};
@@ -387,6 +445,7 @@
         fileBox = (opt.mime) ? VidooBoxHtml(file, opt) : DocBoxHtml(file, opt);
         return (fileBox) ? fileBox : false;
     }
+
     function VidooBoxHtml(file, opt) {
         var vidooBox = '';
         vidooBox += '<div class="filebox" style="width:' + opt.width + 'px;height:' + opt.height + 'px;">';
@@ -417,13 +476,16 @@
 
         return (vidooBox) ? vidooBox : false;
     }
+
     function PrintIframe() {
         frames["fileboxframe"].focus();
         frames["fileboxframe"].print();
     }
+
     function returnFalse() {
         return false;
     }
+
     $(".printFile").on("click", function () {
         var file = $(this).attr("href");
         var newWin = window.open(file, "printFile", "width=800,height=800,resizable=yes,scrollbars=yes,status=yes");
@@ -431,6 +493,7 @@
         if (newWin.print()) newWin.close();
         return false;
     });
+
     function DocBoxHtml(file, opt) {
         var docBox = '';
         var ext = false;
@@ -443,6 +506,7 @@
         }
         return (docBox) ? docBox : false;
     }
+
     function YtbBoxHtml(file, opt) {
         var docBox = '';
         var ext = false;
@@ -455,6 +519,7 @@
         }
         return (docBox) ? docBox : false;
     }
+
     $(".modalFile").each(function (i) {
         var modalFile = $(this);
         modalFile.on("click", function () {
@@ -563,8 +628,8 @@
     (function (i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
         a = s.createElement(o),
             m = s.getElementsByTagName(o)[0];
         a.async = 1;

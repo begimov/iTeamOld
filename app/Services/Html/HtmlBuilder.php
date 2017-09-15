@@ -180,7 +180,7 @@ class HtmlBuilder extends \Collective\Html\HtmlBuilder {
 	}
 
 	public function paymentTypeText($payment_type = null){
-        $types = ["paypal" => "PayPal", "ya_ac" => "Банковская карта", "invoicing" => "Запрос счета", "transfer" => "Перевод", "robokassa" => "Робокасса", "sberbank" => "Сбербанк", "ya_pc" => "Я.Деньги", "ya_ka" => "Я.Касса", "gift" => "Подарок"];
+        $types = ["walletone" => "Единая касса", "paypal" => "PayPal", "ya_ac" => "Банковская карта", "invoicing" => "Запрос счета", "transfer" => "Перевод", "robokassa" => "Робокасса", "sberbank" => "Сбербанк", "ya_pc" => "Я.Деньги", "ya_ka" => "Я.Касса", "gift" => "Подарок"];
 		return ($payment_type && isset($types[$payment_type])) ? $types[$payment_type] : 'Неизвестный тип оплаты';
 	}
 

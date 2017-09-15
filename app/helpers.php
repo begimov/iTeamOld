@@ -1,5 +1,18 @@
 <?php
 
+if (!function_exists('generateWalletOneSignature')) {
+		function generateWalletOneSignature(array $formFields)
+		{
+				uksort($formFields, "strcasecmp");
+
+				$fieldValues = array_reduce($formFields, function ($result, $fieldValue) {
+						return $result . iconv("UTF-8", "Windows-1251", $fieldValue);
+				}, "");
+
+				return base64_encode(pack("H*", md5($fieldValues . config('payments.walletone_key'))));
+		}
+}
+
 if (!function_exists('isActivePath')) {
 	function isActivePath($path)
 	{

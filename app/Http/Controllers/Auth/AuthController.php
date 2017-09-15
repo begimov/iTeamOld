@@ -1004,8 +1004,8 @@ class AuthController extends Controller
     public function resetOldPassword()
     {
 		if(!session('toresetpsswrd')) return "error toresetpsswrd";
-		
+
 		return "Переустановка пароля старого юзера";
     }	
-	
+
 }

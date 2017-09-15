@@ -30,6 +30,13 @@
 				<h4 class="list-group-item-heading">Перевод на карту Сбербанк</h4>
 				<p class="list-group-item-text">Узнайте номер карты для перевода через Сбербанк.Онлайн или отделение банка</p>
 			</label>
+			<label href="#" class="payment-change label-button list-group-item {{ ($order && $order->payment_type === 'walletone') ? 'active' : '' }}">
+				<input type="radio" name="payment_type" value="walletone" class="hidden" {{ ($order && $order->payment_type === 'walletone') ? 'checked' : '' }}>
+				<span class="image-left"><img src="/img/walletone_icon.png"></span>
+				<h4 class="list-group-item-heading">Оплата банковской картой</h4>
+				<p class="list-group-item-text">для жителей Украины, Беларуси, Казахстана</p>
+			</label>
+
 		</div>
 	</div>
 
@@ -55,11 +62,11 @@
 			</label>
 		</div>
 	</div>
-	
+
 	@if($user)
 		{{ Form::hidden('product_id',(@$page ? $page->id : $order->product_id)) }}
 	@endif
-	
+
 	{{ Form::close() }}
 
 </div>
