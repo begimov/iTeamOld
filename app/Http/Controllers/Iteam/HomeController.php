@@ -145,20 +145,20 @@ class HomeController extends Controller
 //            } catch (\ErrorException $e) {
 //                $countDownloads = [1656];
 //            }
-
-            return view('iteam.home', compact(
-                'page',
-                'childrens',
-                'news',
-                'breakfast',
-                'crumbs',
-                'user',
-                'marks'
+return view('iteam.newhome', compact('page'));
+            // return view('iteam.home', compact(
+            //     'page',
+            //     'childrens',
+            //     'news',
+            //     'breakfast',
+            //     'crumbs',
+            //     'user',
+            //     'marks'
 //                'countArticles',
 //                'countLearns',
 //                'countUsers',
 //                'countDownloads'
-            ));
+            // ));
 		}
 		else
 		{

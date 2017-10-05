@@ -189,6 +189,7 @@
             });
 
             $('#send-button').click(function (e) {
+							console.log($('#form-send-review').serialize());
                 if ($('#message').val().length > 10 && $('#name').val().length > 3) {
                     e.preventDefault();
                     $.ajax({
