@@ -1,4 +1,4 @@
-@extends('iteam.newtemplate_no_fb')
+@extends('iteam.newtemplate_no_fb2')
 
 @section('title')
 	{{ $page->meta_title ? $page->meta_title . ' ' : ($page->title ? $page->title . ' ' : '') }}
@@ -11,6 +11,43 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<style>
+	
+	/*  2 КОПИРОВАТЬ ОТ СИХ !!! */
+	.modal {
+		display: none; /* Hidden by default */
+		position: fixed; /* Stay in place */
+		z-index: 600; /* Sit on top */
+		left: 0;
+		top: 0;
+		width: 100%; /* Full width */
+		height: 100%; /* Full height */
+		overflow: auto; /* Enable scroll if needed */
+		background-color: rgb(0,0,0); /* Fallback color */
+		background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+	}
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe;
+		margin: 15% auto; /* 15% from the top and centered */
+		padding: 20px;
+		width: 40%;
+	}
+	/* The Close Button */
+	.close-x {
+		margin: -15px;
+		color: #aaa;
+		float: right;
+		font-size: 40px;
+		font-weight: bold;
+	}
+	.close-x:hover,
+	.close-x:focus {
+		color: black;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	/*  2 КОПИРОВАТЬ ДО СИХ !!! */
+
 	.spinner {
 		margin: 0px auto 0;
 		width: 70px;
@@ -368,36 +405,42 @@
 
 		</div>
 
+		<!-- 2 КОПИРОВАТЬ ОТ СИХ !!! -->
+		<div id="myModal" class="modal">
+			<div class="modal-content">
+				<span class="close-x">&times;</span>
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<p><img src="https://iteam.ru/img/bghome6.jpg" width="30%"></p>
+						<h3>Магнит..</h3>
+						<p><script type="text/javascript" src="https://app.getresponse.com/view_webform_v2.js?u=Bh5z&webforms_id=6198206"></script></p>
+					</div>	
+				</div>
+			</div>
+		</div>
+		<!-- 2 КОПИРОВАТЬ ДО СИХ !!! -->
+
 	@stop
 
 	@section('scripts')
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<!-- 2 КОПИРОВАТЬ ОТ СИХ !!! -->
 		<script type="text/javascript">
+			$(document).ready(function() {
 
-		$(document).ready(function () {
-			$('#mylink').click(function (e) {
-				var $this = $(this);
-				$this.button('loading');
-				setTimeout(function() {
-					$this.button('reset');
-				}, 5000);
-			});
-		});
+				var modal = document.getElementById('myModal');
+				var span = document.getElementsByClassName("close-x")[0];
+				span.onclick = function() {
+					modal.style.display = "none";
+				}
 
-		var myLink = document.getElementById('mylink');
-
-		myLink.onclick = function() {
-			var script = document.createElement("script");
-			script.type = "text/javascript";
-			script.src = "https://app.getresponse.com/view_webform_v2.js?u=Bh5z&webforms_id=6168206";
-			document.getElementsByTagName("body")[0].appendChild(script);
-			return false;
-		}
-
+				if (!Cookies.get('magnet_wall')) {
+					modal.style.display = "block";
+					window.onload = function() {
+						yaCounter30664892.reachGoal('LANDED_ON_WALL')
+					}
+					Cookies.set('magnet_wall', 'reached', { expires: 1 });
+				}					
+			});	
 		</script>
-		<!-- КОПИРОВАТЬ ДО СИХ !!! -->
-
+		<!-- 2 КОПИРОВАТЬ ДО СИХ !!! -->
 	@stop
