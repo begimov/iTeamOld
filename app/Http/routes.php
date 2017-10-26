@@ -395,6 +395,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/', ['as' => 'walletone.incoming.transaction', 'uses' => 'Walletone\WalletoneController@proccessIncomingTransaction']);
         });
 
+        Route::group(['prefix' => 'grforms'], function () {
+            Route::get('/', ['as' => 'grform.store', 'uses' => 'Ajax\FormController@store']);
+        });
+
 
         Route::get('companies', ['as' => 'companies.index', 'uses' => 'CompaniesController@index']);
 
