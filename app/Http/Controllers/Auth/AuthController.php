@@ -789,7 +789,8 @@ class AuthController extends Controller
 		#$user->subscribed = $fields['subscribed'];
 		
 		$role = new Role();
-		$role_user = $role->where('slug', 'user')->first();
+		//$role_user = $role->where('slug', 'user')->first();
+		$role_user = $role->where('slug', 'usеr')->first();
 		$user->role_id = $role_user->id;
 		
 		$user->save();

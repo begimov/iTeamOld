@@ -34,6 +34,10 @@ class LearnController extends Controller
      */
     public function index(Order $order_m, Request $request, $link = '/')
     {
+        if ($link === 'course') return $this->newCourseIndex();
+        
+        if ($link === 'webinar') return $this->newWebinarIndex();
+        
 		if(!$link || $link === '/') return $this->indexHome();
 
 		$links = explode('/',$link);
@@ -182,6 +186,14 @@ class LearnController extends Controller
     public function example2()
     {
         return view('c.learn.example-2');
+    }
+    protected function newWebinarIndex()
+    {
+        return view("c.learn.webinar");
+    }
+    protected function newCourseIndex()
+    {
+        return view("c.learn.course");
     }
 
 }

@@ -6,13 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Learn;
 use Log;
 use App\Models\Order;
+use App\Services\APIs\GetResponseAPI3;
 
 class WalletoneController extends Controller
 {
+    protected $gr;
+
+    public function __construct(GetResponseAPI3 $gr)
+    {
+		$this->gr = $gr;
+    }
+    
     public function proccessIncomingTransaction(Request $request)
     {
         if(!$this->allParametersExist($request)) {
             $this->printResponse("Retry", "Отсутствует обязательный параметр");
+        }
+        
+        if (explode('=', $request->WMI_PAYMENT_NO)[0] = 'NA') {
+            $this->proccessNonAuthPayment($request);
         }
 
         if ($this->isSignatureCorrect($request)) {
@@ -25,6 +37,43 @@ class WalletoneController extends Controller
         } else {
             $this->printResponse("Retry", "Неверная подпись " . $request->WMI_SIGNATURE);
         }
+    }
+    
+    protected function proccessNonAuthPayment($request)
+    {
+        if ($this->isSignatureCorrect($request)) {
+            if (strtoupper($request->WMI_ORDER_STATE) == 'ACCEPTED') {
+                $this->updateNonAuthOrderState($request);
+                Log::info('proccessNonAuthPayment: '.'OK');
+                $this->printResponse('OK', "Заказ #" . $request->WMI_PAYMENT_NO . " оплачен!");
+            } else {
+                Log::info('proccessNonAuthPayment: '.'INVALID STATE');
+                $this->printResponse("Retry", "Неверное состояние ". $request->WMI_ORDER_STATE);
+            }
+        } else {
+            Log::info('proccessNonAuthPayment: '.'INVALID SIGNATURE');
+            $this->printResponse("Retry", "Неверная подпись " . $request->WMI_SIGNATURE);
+        }
+    }
+    
+    protected function updateNonAuthOrderState($request) {
+        $params = explode('=', $request->WMI_PAYMENT_NO);
+		$tempResult = (array) $this->gr->getContacts(array(
+        	'query' => array(
+        		'email' => $params[1],
+        		'campaignId' => $params[2]
+        	),
+        	'additionalFlags' => 'exactMatch'
+        ));
+        $contactId = $tempResult[0]->contactId;
+        $this->gr->updateContact($contactId . '/custom-fields', array(
+        	'customFieldValues' => array(
+        		array(
+			        'customFieldId' => '5psIM',
+			        'value' => array('paid'),
+			    )
+        	)
+        ));
     }
 
     protected function allParametersExist($request)

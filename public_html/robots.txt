@@ -5,13 +5,20 @@ Disallow: /promo/
 Disallow: /business-processes-form.php
 Disallow: /~
 Disallow: /webinar/
+Disallow: /learn/webinar/business_processes
 Sitemap: https://iteam.ru/sitemap.xml
 
 User-agent: Yandex 
+Disallow: /?p=
+Disallow: /?404
+Disallow: /index.php
+Disallow: /*?part=
+Disallow: /*?page=1
 Disallow: /~
 Disallow: /webinars/
 Disallow: /filemanager/
 Disallow: /promo/
 Disallow: /business-processes-form.php
 Disallow: /webinar/
+Disallow: /learn/webinar/business_processes
 Host: https://iteam.ru

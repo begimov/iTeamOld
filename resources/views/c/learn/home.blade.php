@@ -66,7 +66,6 @@
                 </div>
             @endif
 
-
             @if($childrens)
                 <br class="temp-correct">
                 <div class="row media_list">
@@ -86,7 +85,7 @@
 
                                 <div class="media-body">
                                     <h4 class="media-heading"
-                                        style="width:100%; background-color:#ddd; padding:20px;border-radius:7px;margin:0;">
+                                        style="width:945px; background-color:#ddd; padding:20px;border-radius:7px;margin:0;">
                                         <img class="pics-mk"
                                              src="/filemanager/userfiles/user0/content/title-mk1-small.png"
                                              style="border-right:2px solid #666; padding-right:20px;margin-right:20px;"/>

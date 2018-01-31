@@ -479,7 +479,7 @@
 
 	</div>
 
-	<div id="goodbye" style="z-index:9999999;" class="blur_fon">
+	<div id="goodbye" style="z-index:9999999;overflow: auto;" class="blur_fon">
 		<div class="goodbye_content">
 			<h2>Вам подарок!</h2>
 			<!--<p><i style="font-size:96px;color:#c00;" class="material-icons">&#xE8F6;</i></p>-->

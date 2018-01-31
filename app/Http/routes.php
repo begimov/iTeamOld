@@ -374,7 +374,7 @@ Route::get('company/business-club', function () {
     return redirect('/company/about');
 });
 
-
+// руты для отправки опроса на мыло
 Route::group(['prefix' => 'SendMail'], function () {
     Route::get('/index', function () {
         return view('iteam.expertnaja-daignostika-sistemi-finansovogo-urpavlenija.index');
@@ -383,8 +383,27 @@ Route::group(['prefix' => 'SendMail'], function () {
         return view('iteam.expertnaja-daignostika-sistemi-finansovogo-urpavlenija.forma');
     });
 });
-
 Route::post('sendemail', ['as' => 'emailTest.EmailSend.sendMail', 'uses' => 'EmailTest\EmailSendController@sendMail']);
+
+
+
+//руты для сбора отзывов для получения материалов
+Route::group(['middleware' => ['web']], function () {
+    Route::group(['prefix' => 'SendComment'], function () {
+        Route::get('/index', function () {
+            return view('iteam.razrabotka-planov-i-budzhetov-na-2018.index');
+        });
+        Route::get('/materiali', function () {
+            return view('iteam.razrabotka-planov-i-budzhetov-na-2018.materiali');
+        });
+    });
+
+    Route::post('SendComment', ['as' => 'emailTest.EmailSend.sendComm', 'uses' => 'EmailTest\EmailSendController@sendComm']);
+    Route::get('RequestCall', ['as' => 'emailTest.EmailSend.requestCall', 'uses' => 'EmailTest\EmailSendController@requestCall']);
+});
+
+
+
 
 
 Route::group(['middleware' => ['web']], function () {
@@ -394,7 +413,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'walletone'], function () {
             Route::post('/', ['as' => 'walletone.incoming.transaction', 'uses' => 'Walletone\WalletoneController@proccessIncomingTransaction']);
         });
-
+        
+        Route::group(['prefix' => 'grform'], function () {
+            Route::get('/', ['as' => 'grform.store', 'uses' => 'Ajax\FormController@store']);
+            Route::get('/payment', ['as' => 'grform.payment', 'uses' => 'Ajax\FormController@storePayment']);
+        });
 
         Route::get('companies', ['as' => 'companies.index', 'uses' => 'CompaniesController@index']);
 

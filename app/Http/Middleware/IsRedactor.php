@@ -14,10 +14,13 @@ class IsRedactor {
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (session('statut') === 'admin' || session('statut') === 'redac')
+	    //dd(session('statut'),gettype(session('statut')), session('statut') === 'аdmin',session('statut') === 'redac');
+		if (session('statut') === 'admin' || session('statut') === 'redac' || session('statut') === 'аdmin')
 		{
+		    //dd();
 			return $next($request);
 		}
+		//dd();
 		return new RedirectResponse(url('/'));
 	}
 

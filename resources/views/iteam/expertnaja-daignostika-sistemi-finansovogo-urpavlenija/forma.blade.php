@@ -1,31 +1,4 @@
-<?php
-////require_once 'PHPExcel-1.8/Classes/PHPExcel.php';
-//
-//if ($_POST['submit']) {
-//
-//
-//    foreach ($arr as $k => $v) {
-//        /* Каждый раз делаем активной 1-ю страницу и получаем её, потом записываем в неё данные */
-//        $page->setCellValue("F1", "АНКЕТА");
-//        $page->setCellValue("F2", $_POST['email']);
-//        $page->setCellValue("A3", "Вопрос");
-//        $page->setCellValue("B3", "Ответ");
-//        $page->setCellValue("C3", "Кмментарий");
-//        $page->setCellValue("A" . $count, $k);
-//        $page->setCellValue("B" . $count, $v[0]);
-//        $page->setCellValue("C" . $count, $v[1]);
-//
-//        $count++;
-//    }
-//    $page->setTitle("Test"); // Ставим заголовок "Test" на странице
-//    /* Начинаем готовиться к записи информации в xlsx-файл */
-//    $objWriter = PHPExcel_IOFactory::createWriter($phpexcel, 'Excel2007');
-//    /* Записываем в файл */
-//    $objWriter->save("forma.xlsx");
-//
-//}
-?>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Экспертная диагностика системы финансового управления</title>
@@ -205,8 +178,40 @@
 
     </style>
     <script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>
+
 </head>
 <body>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter45964818 = new Ya.Metrika({
+                    id:45964818,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/45964818" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <div id="page">
     <div id="body">
         <div id="header">
@@ -583,7 +588,7 @@
                 <input id="email" type="email" name="email" required>
                 <br/>
                 <label for="phone" style="font-weight: bold">Введите свой номер телефона: </label>
-                <input style="text-align: right" id="phone" type="tel" name="phone" required><br />
+                <input style="text-align: right" id="phone" type="tel" name="phone" required><br/>
                 <input type="submit" value="Отправить анкету" class="button10" name="submit">
             </form>
         </div>
