@@ -226,6 +226,7 @@ es("pushOn");
 			<button type="submit" name="sa" value="🔍"><i class="material-icons">&#xE8B6;</i></button>
 		</form>
 	</div>
+	
 	<div class="header-in-out">
 		<a href="https://iteam.ru/i/auth" class="btn">войти</a>
 		<a href="https://iteam.ru/i/auth" class="btn">регистрация</a></div>
@@ -235,9 +236,8 @@ es("pushOn");
 			</div>
 			<!--                <a href="#" class="header-contact-info-desc" style="pointer-events: none;">Online консультант</a>-->
 		</div>
-
-
 	</div>
+
 	<div class="header-bottom">
 		<nav class="header-nav header-nav-css">
 			<ul>
