@@ -408,7 +408,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::group(['domain' => 'iteam.ru'], function () {
+    Route::group(['domain' => 'old.iteam.test'], function () {
 
         Route::group(['prefix' => 'walletone'], function () {
             Route::post('/', ['as' => 'walletone.incoming.transaction', 'uses' => 'Walletone\WalletoneController@proccessIncomingTransaction']);

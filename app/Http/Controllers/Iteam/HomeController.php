@@ -23,6 +23,10 @@ class HomeController extends Controller
      */
     public function index(Request $request, $link = '/')
     {
+		if ($request->v2page_debug == 1) {
+			return $this->indexHomeV2();
+		}
+
 		if(!$link || $link === '/')
 		{
 		    return rand(0,1) === 0 ? $this->indexHome() : $this->indexABTest();
@@ -217,6 +221,60 @@ return view('iteam.newhome', compact('page'));
 			$marks = Mark::all();
 
             return view('iteam.newhome_AB2', compact('page'));
+
+		}
+		else
+		{
+			abort(404);
+		}
+
+	}
+	
+    /**
+     * Display a Home Page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexHomeV2()
+    {
+
+		$page = Articles::where('wid','=','')
+					->where('path','=','')
+					->first();
+		if($page)
+		{
+			$childrens = [];
+			if($page->children)
+			{
+
+				$childrens = Articles::with('parent')
+								->where('path','LIKE','/publications/%')
+								->where('title','NOT LIKE','')
+								->where('children','=','0')
+								->where('public','>','0')
+								->where('published_at','<',date("Y-m-d H:i:s"))
+								->orderBy('published_at', 'desc')
+								->take($this->paginate)
+								->get();
+			}
+
+			$crumbs = [];
+			$user = Auth::user();
+
+			$news = News::where('public','>','0')
+								->orderBy('created_at', 'desc')
+								->take(3)
+								->get();
+
+			$breakfast = Learn::where('path','=','/breakfast/')
+								->where('public','>','0')
+								->where('published_at','<',date("Y-m-d H:i:s"))
+								->orderBy('published_at', 'desc')
+								->first();
+
+			$marks = Mark::all();
+
+            return view('iteam.v2.index', compact('page'));
 
 		}
 		else
