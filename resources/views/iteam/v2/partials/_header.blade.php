@@ -69,8 +69,8 @@
     </div>
 
     <div class="header-in-out">
-        <a href="https://iteam.ru/i/auth" class="btn">войти</a>
-        <a href="https://iteam.ru/i/auth" class="btn">регистрация</a></div>
+        <a href="https://iteam.ru/i/auth" class="btn btn-sm">войти</a>
+        <a href="https://iteam.ru/i/auth" class="btn btn-sm">регистрация</a></div>
         <div class="header-contact-info">
             <div class="header-contact-info-title">
                 <a href="tel:+74991102684">+7 (499) 110 26 84</a>
